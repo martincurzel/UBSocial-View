@@ -18,9 +18,16 @@ import axios from 'axios';
 const pages = [
   { name: 'Actividades', route: '/actividades' },
   { name: 'Propuestas', route: '/propuestas' },
-  { name: 'Contenido Descargable', route: '/contenido' },
-  { name: 'Perfil', route: '/perfil' }
+  { name: 'Contenido Descargable', route: '/contenido' }
 ];
+
+const perfil = {
+  name: 'Perfil', route: '/perfil'
+}
+
+const home = {
+  name: 'Home', route: '/'
+}
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -69,6 +76,7 @@ function ResponsiveAppBar() {
         // Handle any errors from the API
         console.error(error);
       });*/
+      setIsLoggedIn(true);
       handleCloseLoginModal();
   };
 
@@ -176,7 +184,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            UB Social
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -194,9 +202,22 @@ function ResponsiveAppBar() {
 
           <div style={{ marginLeft: 'auto' }}>
           {isLoggedIn ? (
-            <Button color="inherit" onClick={handleLogout}>
-              Logout
-            </Button>
+            <>
+              <Button 
+                component={Link}
+                to={perfil.route}
+                color="inherit" 
+                onClick={handleCloseNavMenu}>
+                  {perfil.name}
+              </Button>
+              <Button 
+                component={Link}
+                to={home.route}
+                color="inherit" 
+                onClick={handleLogout}>
+                Logout
+              </Button>
+            </>
           ) : (
             <>
               <Button color="inherit" onClick={handleOpenLoginModal}>
