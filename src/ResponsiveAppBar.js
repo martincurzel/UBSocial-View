@@ -12,8 +12,15 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-const pages = ['Actividades', 'Propuestas', 'Contenido Descargable'];
+const pages = [
+  { name: 'Actividades', route: '/actividades' },
+  { name: 'Propuestas', route: '/propuestas' },
+  { name: 'Contenido Descargable', route: '/contenido' },
+  { name: 'Perfil', route: '/perfil' }
+];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -49,7 +56,7 @@ function ResponsiveAppBar() {
     e.preventDefault();
 
     // Make the API call using Axios
-    axios.post('/api/endpoint', {
+    /*axios.post('/api/endpoint', {
       email,
       password,
     })
@@ -61,7 +68,8 @@ function ResponsiveAppBar() {
       .catch((error) => {
         // Handle any errors from the API
         console.error(error);
-      });
+      });*/
+      handleCloseLoginModal();
   };
 
   const handleOpenSignupModal = () => {
@@ -70,6 +78,20 @@ function ResponsiveAppBar() {
 
   const handleSignupFormSubmit = (e) => {
     e.preventDefault();
+    // Make the API call using Axios
+    /*axios.post('/api/endpoint', {
+      email,
+      password,
+    })
+      .then((response) => {
+        setIsLoggedIn(true);
+        handleCloseLoginModal();
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle any errors from the API
+        console.error(error);
+      });*/
     handleCloseSignupModal();
   };
 
@@ -128,10 +150,12 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+              {pages.map(page => (
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                <Link to={page.route} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <Typography textAlign="center">{page.name}</Typography>
+                </Link>
+              </MenuItem>
               ))}
             </Menu>
           </Box>
@@ -157,11 +181,13 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                component={Link}
+                to={page.route}
+                key={page.name}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>
