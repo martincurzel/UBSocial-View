@@ -1,10 +1,16 @@
 import React from 'react';
+import { useSelector, useDispatch  } from "react-redux";
+import { logState } from "../slicers/authSlice";
 
 const PerfilPage = () => {
+  const userId = useSelector((state) => state.auth.userId);
+  const dispatch = useDispatch();
+
+  dispatch(logState());
+
   return (
     <div>
-      <h1>Welcome to the PerfilPage</h1>
-      <p>This is the content of the PerfilPage.</p>
+      <div>{userId}</div>
     </div>
   );
 };

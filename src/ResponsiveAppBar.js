@@ -14,6 +14,8 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useSelector, useDispatch } from "react-redux";
+import { login, logout } from "./slicers/authSlice";
 
 const pages = [
   { name: 'Actividades', route: '/actividades' },
@@ -31,7 +33,6 @@ const home = {
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(null);
   const [isLoginModalOpen, setIsLoginModalOpen] = React.useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = React.useState(false);
   const [email, setEmail] = React.useState('');
@@ -39,12 +40,16 @@ function ResponsiveAppBar() {
   const [nombre, setNombre] = React.useState('');
   const [apellido, setApellido] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [errorMessage, setErrorMessage] = React.useState('');
+
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleLogout = (event) => {
-    setIsLoggedIn(false);
+    dispatch(logout());
   };
 
   const handleCloseNavMenu = () => {
@@ -52,6 +57,7 @@ function ResponsiveAppBar() {
   };
 
   const handleOpenLoginModal = () => {
+    setErrorMessage("");
     setIsLoginModalOpen(true);
   };
   
@@ -62,45 +68,58 @@ function ResponsiveAppBar() {
   const handleLoginFormSubmit = (e) => {
     e.preventDefault();
 
+    let user = {
+      Password: password,
+      Email: email
+    }
+
     // Make the API call using Axios
-    /*axios.post('/api/endpoint', {
-      email,
-      password,
+    /*axios.post('/userLogin', {
+      user
     })
       .then((response) => {
-        setIsLoggedIn(true);
-        handleCloseLoginModal();
+        dispatch(login({ email }));
         console.log(response.data);
+        handleCloseLoginModal();
       })
       .catch((error) => {
         // Handle any errors from the API
+        setErrorMessage(error.message);
         console.error(error);
       });*/
-      setIsLoggedIn(true);
+      dispatch(login({ userId: email }));
       handleCloseLoginModal();
   };
 
   const handleOpenSignupModal = () => {
+    setErrorMessage("");
     setIsSignupModalOpen(true);
   };
 
   const handleSignupFormSubmit = (e) => {
     e.preventDefault();
+
+    let user = {
+      Password: password,
+      Email: email,
+      Name: nombre,
+      Surname: apellido
+    }
+
     // Make the API call using Axios
-    /*axios.post('/api/endpoint', {
-      email,
-      password,
+    axios.post('/', {
+      user
     })
-      .then((response) => {
-        setIsLoggedIn(true);
-        handleCloseLoginModal();
-        console.log(response.data);
-      })
-      .catch((error) => {
-        // Handle any errors from the API
-        console.error(error);
-      });*/
-    handleCloseSignupModal();
+    .then((response) => {
+      dispatch(login({ email }));
+      console.log(response.data);
+      handleCloseLoginModal();
+    })
+    .catch((error) => {
+      // Handle any errors from the API
+      setErrorMessage(error.message);
+      console.error(error);
+    });
   };
 
   const handleCloseSignupModal = () => {
@@ -231,7 +250,7 @@ function ResponsiveAppBar() {
         </div>
         </Toolbar>
         <Modal open={isLoginModalOpen} onClose={handleCloseLoginModal}>
-        <div style={{ backgroundColor: '#f0f0f0', width: 300, height: 250, margin: 'auto', marginTop: 100, padding: 20 }}>
+        <div style={{ backgroundColor: '#f0f0f0', width: 300, height: 280, margin: 'auto', marginTop: 100, padding: 20 }}>
           <h2>Login</h2>
           <form onSubmit={handleLoginFormSubmit} style={{ display: 'grid', gap: '10px' }}>
             <TextField
@@ -249,11 +268,12 @@ function ResponsiveAppBar() {
               required
             />
             <Button type='submit' variant="outlined" color="secondary">Login</Button>
+            <div style={{"color": "#fc0303"}} >{errorMessage}</div>
           </form>
         </div>
       </Modal>
       <Modal open={isSignupModalOpen} onClose={handleCloseSignupModal}>
-        <div style={{ backgroundColor: '#f0f0f0', width: 300, height: 450, margin: 'auto', marginTop: 100, padding: 20 }}>
+        <div style={{ backgroundColor: '#f0f0f0', width: 300, height: 480, margin: 'auto', marginTop: 100, padding: 20 }}>
           <h2>Signup</h2>
           <form onSubmit={handleSignupFormSubmit} style={{ display: 'grid', gap: '10px' }}>
             <TextField
@@ -292,6 +312,7 @@ function ResponsiveAppBar() {
               required
             />
             <Button type='submit' variant="outlined" color="secondary">Signup</Button>
+            <div style={{"color": "#fc0303"}} >{errorMessage}</div>
           </form>
         </div>
       </Modal>
