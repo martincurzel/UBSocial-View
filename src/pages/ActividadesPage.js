@@ -57,7 +57,7 @@ const ActividadesPage = () => {
         {/* barra de busqueda de actividades */}
         
        <ActLista acts={act} title="Todas las Actividades"/> 
-       <ActLista acts={act.filter((ACT)=> ACT.author === `Martincito`)} title="Actividades de Martincito"/> {/* Codigo de la lista que filtra por el titulo */}
+       {/* <ActLista acts={act.filter((ACT)=> ACT.author === `Martincito`)} title="Actividades de Martincito"/> Codigo de la lista que filtra por el titulo */}
        
         {/* Mostrar toda la lista de actividades */}
 
