@@ -13,9 +13,9 @@ import AdbIcon from '@mui/icons-material/Adb';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { useSelector, useDispatch } from "react-redux";
 import { login, logout } from "./slicers/authSlice";
+import { callApiNoRead } from "./helpers/apiCallNoRead";
 
 const pages = [
   { name: 'Actividades', route: '/actividades' },
@@ -36,7 +36,6 @@ function ResponsiveAppBar() {
   const [isLoginModalOpen, setIsLoginModalOpen] = React.useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = React.useState(false);
   const [email, setEmail] = React.useState('');
-  const [dni, setDni] = React.useState('');
   const [nombre, setNombre] = React.useState('');
   const [apellido, setApellido] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -48,7 +47,7 @@ function ResponsiveAppBar() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleLogout = (event) => {
+  const handleLogout = () => {
     dispatch(logout());
   };
 
@@ -69,26 +68,23 @@ function ResponsiveAppBar() {
     e.preventDefault();
 
     let user = {
-      Password: password,
-      Email: email
+      "Password": password,
+      "Email": email
     }
 
-    // Make the API call using Axios
-    /*axios.post('/userLogin', {
-      user
-    })
-      .then((response) => {
-        dispatch(login({ email }));
-        console.log(response.data);
+    callApiNoRead("POST", "user/userLogin", user)
+      .then(response => {
+        let userId = email;
+        let loginToken = response.data;
+        console.log('Response:',response);
+        dispatch(login({ userId , loginToken}));
         handleCloseLoginModal();
       })
-      .catch((error) => {
+      .catch(error => {
         // Handle any errors from the API
-        setErrorMessage(error.message);
-        console.error(error);
-      });*/
-      dispatch(login({ userId: email }));
-      handleCloseLoginModal();
+        setErrorMessage(error.response.data);
+        console.error('Error:',error);
+      });
   };
 
   const handleOpenSignupModal = () => {
@@ -100,26 +96,39 @@ function ResponsiveAppBar() {
     e.preventDefault();
 
     let user = {
-      Password: password,
-      Email: email,
-      Name: nombre,
-      Surname: apellido
+      "Password": password,
+      "Email": email,
+      "Name": nombre,
+      "Surname": apellido,
+      "Admin": false
     }
 
-    // Make the API call using Axios
-    axios.post('/', {
-      user
-    })
-    .then((response) => {
-      dispatch(login({ email }));
-      console.log(response.data);
-      handleCloseLoginModal();
-    })
-    .catch((error) => {
-      // Handle any errors from the API
-      setErrorMessage(error.message);
-      console.error(error);
-    });
+    callApiNoRead("POST", "user/", user)
+      .then(response => {
+        console.log('Response:',response);
+        let logUser = {
+          "Password": password,
+          "Email": email
+        }
+        callApiNoRead("POST", "user/userLogin", logUser)
+          .then(response => {
+            let userId = email;
+            let loginToken = response.data;
+            console.log('Response:',response);
+            dispatch(login({ userId , loginToken}));
+            handleCloseSignupModal();
+          })
+          .catch(error => {
+            // Handle any errors from the API
+            setErrorMessage(error.response.data);
+            console.error('Error:',error);
+          });
+      })
+      .catch(error => {
+        // Handle any errors from the API
+        setErrorMessage(error.response.data);
+        console.error('Error:',error);
+      });
   };
 
   const handleCloseSignupModal = () => {
@@ -273,7 +282,7 @@ function ResponsiveAppBar() {
         </div>
       </Modal>
       <Modal open={isSignupModalOpen} onClose={handleCloseSignupModal}>
-        <div style={{ backgroundColor: '#f0f0f0', width: 300, height: 480, margin: 'auto', marginTop: 100, padding: 20 }}>
+        <div style={{ backgroundColor: '#f0f0f0', width: 300, height: 430, margin: 'auto', marginTop: 100, padding: 20 }}>
           <h2>Signup</h2>
           <form onSubmit={handleSignupFormSubmit} style={{ display: 'grid', gap: '10px' }}>
             <TextField
@@ -281,13 +290,6 @@ function ResponsiveAppBar() {
               label="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <TextField
-              type="dni"
-              label="DNI"
-              value={dni}
-              onChange={(e) => setDni(e.target.value)}
               required
             />
             <TextField
