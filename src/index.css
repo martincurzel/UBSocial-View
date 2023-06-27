@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.act-preview{
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+}
+
+.act-preview:hover{
+  box-shadow: 1px 3px 5px #000000;
+}
+
+.act-preview h2{
+  font-size: 20px;
+  color: #980000;
+  margin-bottom: 8px;
+}
+
