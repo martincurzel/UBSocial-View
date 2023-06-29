@@ -28,3 +28,56 @@ code {
   margin-bottom: 8px;
 }
 
+
+.Crear {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+.Crear label {
+  text-align: left;
+  display: block;
+}
+.Crear h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 30px;
+}
+.Crear input, .Crear textarea, .Crear select {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
+.Crear button {
+  background: #f1356d;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.act-preview{
+ text-decoration: none;  
+}
+
+.Act-Detail h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 10px;
+}
+.Act-Detail div {
+  margin: 20px 0;
+}
+.Act-Detail button {
+  background: #f1356d;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+

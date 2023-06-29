@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {useState} from 'react';
 import ActLista from './ActLista';
+import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 
 
@@ -18,6 +20,17 @@ const ActividadesPage = () => {
   const handleClick = () => {
     setName (`Figuran estas actividades`)
   }
+  
+  // const crearActividad ={
+  //   nombre:"crearActividad", route:"/crearactividades"
+  // }
+
+  
+
+  useEffect (()=>{
+
+  },[]);
+
   return (
     <div>
       <h1>Actividades</h1>
@@ -47,22 +60,34 @@ const ActividadesPage = () => {
           
         </Button> */}
 
-        <button className='btn btn-secondary'>
+        {/* <button className='btn btn-secondary' >
           Crear Actividad 
-        </button>
+        </button> */}
+        <Button
+                component={Link}
+                to={"/crear_a"}
+                key={"Crear Actividad"}
+                sx={{ my: 2, color: 'black', display: 'block' }}
+              >
+                {"Crear Actividad"}
+              </Button>
+        
+
         {/* boton de crear actividades */}
 
         <input type='text' placeholder='Buscar Actividad' className='form-control'>
         </input>
         {/* barra de busqueda de actividades */}
+
+        <button className='btn btn-primary' onClick={handleClick}>Buscar Actividad</button> 
+        {/* Boton de busca actividaes */}
         
-       <ActLista acts={act} title="Todas las Actividades"/> 
+       <ActLista acts={act} title="Todas las Actividades" /> 
        {/* <ActLista acts={act.filter((ACT)=> ACT.author === `Martincito`)} title="Actividades de Martincito"/> Codigo de la lista que filtra por el titulo */}
        
         {/* Mostrar toda la lista de actividades */}
 
-        <button className='btn btn-primary' onClick={handleClick}>Buscar Actividad</button> 
-        {/* Boton de busca actividaes */}
+        
         
 
     </div>
