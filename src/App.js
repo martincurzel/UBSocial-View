@@ -6,7 +6,10 @@ function App() {
   return (
     <>
       <ResponsiveAppBar />
-      <Outlet/>
+      <div className='container mt-5' >
+        <Outlet/>  
+      </div>
+      
     </>
   );
 }

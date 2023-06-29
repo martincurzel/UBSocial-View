@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ActividadesPage from './pages/ActividadesPage.js';
 import PropuestasPage from './pages/PropuestasPage';
 import ContenidoPage from './pages/ContenidoPage.js';
-import PerfilPage from './pages/PerfilPage.js';
+import UserPage from './pages/UserPage.js';
 import { Provider } from "react-redux";
 import store from "./store";
 
@@ -20,7 +20,7 @@ root.render(
             <Route path='actividades' element={<ActividadesPage/>} />
             <Route path='propuestas' element={<PropuestasPage/>} />
             <Route path='contenido' element={<ContenidoPage/>} />
-            <Route path='perfil' element={<PerfilPage/>} />
+            <Route path='perfil' element={<UserPage/>} />
           </Route>
         </Routes>
       </Provider>
