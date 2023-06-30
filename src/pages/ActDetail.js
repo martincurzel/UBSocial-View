@@ -1,24 +1,52 @@
-// import { useParams } from "react-router-dom";
-// import { callApiNoRead } from "../helpers/apiCallNoRead";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { callApiRead } from "../helpers/apiCallRead";
 
 
-// const ActDetail = () => {
 
-//     const ActDetalles = () =>{
-//         const {id} = useParams
-//         const {data} = callApiNoRead(' '+ id)
-//     }
-//     return (
-//         <div className="Act-Detail">
-//             {data && (
-//                 <article>
-//                     {/* <h2>{data.titulo}</h2>
-//                     <p>Escrito por: {data.autor}</p>
-//                     <div>{data.desc}</div> Aca tenes que poner los valores correcto de la BD recordatorio  */}
-//                 </article>
-//             )}
-//         </div>
-//     );
-// }
+const ActDetail = () => {
+
+    
+    const params = useParams();
+    const [activity, setActivity]= useState([])
+
+    useEffect(() => {
+        
+        const fetchData = async () => {
+    
+          await callApiRead("Activity/ActivityIdentifier/"+ params.id)
+            .then(response => {
+              setActivity(response.data[0])
+              console.log(response)
+            })
+            .catch(error => {
+              // Handle any errors from the API
+              console.error('Error:', error);
+            });
+    
+        }
+        
+    
+        fetchData();
+
+         
+         
+
+      }, []);
+    
+    return (
+        <div className="Act-Detail">
+            
+            {activity && (
+                <article>
+                    <h2>{activity.title}</h2>
+                    <p>{activity.URLphotos}</p>
+                    <div>{activity.description}</div> 
+                </article>
+            )}
+        </div>
+        
+    );
+}
  
-// export default ActDetail;
+export default ActDetail;

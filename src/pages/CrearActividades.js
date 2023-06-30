@@ -1,25 +1,26 @@
 import React from "react";
 import { useState } from "react";
+import { callApiNoRead } from "../helpers/apiCallNoRead";
+
 
 
 const CrearActividades = () => {
     const [titulo, setTitulo] = useState("");
     const [desc, setDesc] = useState("");
-    const [autor, setAutor] = useState ("");
+    
     
 
     const handlesubmit = (e) => {
         e.preventDefault()
-        const actividad = {titulo, desc, autor}
+        const actividad = {titulo, desc}
 
-        fetch("",{
-            method:"POST",
-            headers:{"tipo de contenido": ""},
-            body:JSON.stringify(actividad) /*Cambiar por la BD correcta */
-        }).then (()=>{
+        callApiNoRead("POST","Activity", actividad)
+        .then (()=>{
             // history.push('/')
         })
     }
+
+
 
     return(
         <div className="Crear">
@@ -40,17 +41,12 @@ const CrearActividades = () => {
                 onChange={(e) => setDesc(e.target.value)}  
                 />
                 <label >Encargado de la Actividad:</label>
-                <input 
-                type="text"
-                required 
-                value={autor}
-                onChange={(e) => setAutor(e.target.value)}
-                />
+
                 <button>Crear Actividad</button>
-                <h2>Previe</h2>
+                <h2>Preview</h2>
                 <p>{titulo}</p>
                 <p>{desc}</p>
-                <p>{autor}</p>
+               
             </form>
         </div>
     );
