@@ -11,6 +11,7 @@ import UserPage from './pages/UserPage.js';
 import { Provider } from "react-redux";
 import store from "./store";
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <BrowserRouter>

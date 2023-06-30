@@ -10,6 +10,7 @@ export const callApiNoRead = (methodParam, url, data, token) => {
     method: methodParam,
     url: BASE_PATH + url,
     data: data,
+    withCredentials: true,
     headers: {
       'Content-Type': 'application/json',
       'Authorization': "Bearer " + token
