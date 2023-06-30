@@ -15,7 +15,6 @@ import { Provider } from "react-redux";
 import store from "./store";
 import SubirContent from './pages/SubirContent.js';
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <BrowserRouter>

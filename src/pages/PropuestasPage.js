@@ -27,7 +27,6 @@ const PropuestasPage = () => {
       await callApiRead("Proposal")
         .then(response => {
           setProposals(response.data)
-          console.log(response)
         })
         .catch(error => {
           // Handle any errors from the API
