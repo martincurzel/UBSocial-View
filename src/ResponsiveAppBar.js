@@ -263,7 +263,8 @@ function ResponsiveAppBar() {
         <Modal open={isLoginModalOpen} onClose={handleCloseLoginModal}>
         <div style={{ backgroundColor: '#f0f0f0', width: 300, height: 280, margin: 'auto', marginTop: 100, padding: 20 }}>
           <h2>Login</h2>
-          <form onSubmit={handleLoginFormSubmit} style={{ display: 'grid', gap: '10px' }}>
+          <hr/>
+          <form className='mt-2' onSubmit={handleLoginFormSubmit} style={{ display: 'grid', gap: '10px' }}>
             <TextField
               type="email"
               label="Email"

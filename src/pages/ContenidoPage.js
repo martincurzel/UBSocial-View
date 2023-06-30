@@ -15,7 +15,6 @@ const ContenidoPage = () => {
       await callApiRead("DownloadableContent")
         .then(response => {
           setDownload(response.data)
-          console.log(response)
         })
         .catch(error => {
           // Handle any errors from the API
