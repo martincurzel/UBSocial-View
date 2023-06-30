@@ -48,6 +48,7 @@ function ResponsiveAppBar() {
     setAnchorElNav(event.currentTarget);
   };
   const handleLogout = () => {
+    localStorage.removeItem('jwtToken');
     dispatch(logout());
   };
 
@@ -77,6 +78,7 @@ function ResponsiveAppBar() {
         let userId = email;
         let loginToken = response.data;
         console.log('Response:',response);
+        localStorage.setItem('jwtToken', loginToken);
         dispatch(login({ userId , loginToken}));
         handleCloseLoginModal();
       })
