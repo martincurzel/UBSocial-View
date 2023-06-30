@@ -12,7 +12,7 @@ const MiPerfil = () => {
 
   useEffect(() => {
     // Fetch profile data from the API
-    callApiNoRead("GET", "user/current", null, loginToken)
+    callApiNoRead("GET", "user/current", null)
       .then(response => {
         console.log('Response:',response);
         const { name, surname, email } = response.data[0];

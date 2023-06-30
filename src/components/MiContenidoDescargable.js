@@ -7,7 +7,7 @@ const MisActividades = () => {
 
   useEffect(() => {
     // Fetch profile data from the API
-    callApiNoRead("GET", "proposal/current", null, loginToken)
+    callApiNoRead("GET", "proposal/current", null)
       .then(response => {
         console.log('Response:',response);
         setProposals(response.data)

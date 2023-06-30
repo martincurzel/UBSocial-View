@@ -8,7 +8,7 @@ const MisActividades = () => {
 
   useEffect(() => {
     // Fetch profile data from the API
-    callApiNoRead("GET", "activity/current", null, loginToken)
+    callApiNoRead("GET", "activity/current", null)
       .then(response => {
         console.log('Response:',response);
         setActivity(response.data);
