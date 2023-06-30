@@ -1,132 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import { callApiNoRead } from "../helpers/apiCallNoRead";
-import { useSelector } from "react-redux";
-import { Typography, TextField, Button, Grid } from '@mui/material';
-import ResponsiveDrawer from '../ResponsiveDrawer';
+import React from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import { Typography  } from '@mui/material';
+import MiPefil from './MiPerfil';
 
-const ProfilePage = () => {
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isEditing, setIsEditing] = useState(false);
-  const loginToken = useSelector((state) => state.auth.loginToken);
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-  useEffect(() => {
-    // Fetch profile data from the API
-    callApiNoRead("GET", "user/current", null, loginToken)
-      .then(response => {
-        console.log('Response:',response);
-        const { name, surname, email } = response.data[0];
-        setName(name);
-        setSurname(surname);
-        setEmail(email);
-      })
-      .catch(error => {
-        // Handle any errors from the API
-        console.error('Error:',error);
-      });
-  }, [loginToken]);
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
 
-  const handleEditClick = () => {
-    setIsEditing(true);
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `vertical-tab-${index}`,
+    'aria-controls': `vertical-tabpanel-${index}`,
   };
+}
 
-  const handleSaveClick = () => {
-    // Perform save operation here, e.g., make an API call to update the profile
-    let user = {
-        "Password": password,
-        "Email": email,
-        "Name": name,
-        "Surname": surname,
-        "Id": 37
-    }
-    callApiNoRead("PUT", "user", user, loginToken)
-      .then(response => {
-        console.log('Response:',response);
-      })
-      .catch(error => {
-        // Handle any errors from the API
-        console.error('Error:',error);
-      });
-    setIsEditing(false);
+export default function UserPage() {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   return (
-    <div>
-      <div style={{ textAlign: 'center' }}>
-        <Typography variant="h2">Profile</Typography>
-        <div style={{ borderBottom: '1px solid black', margin: '10px 0' }}></div>
-      </div>
-      <Grid container spacing={6} justifyContent="center">
-        <Grid item xs={12} sm={6}>
-          <Typography variant="subtitle1">Name:</Typography>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          {isEditing ? (
-            <TextField
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          ) : (
-            <Typography>{name}</Typography>
-          )}
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography variant="subtitle1">Surname:</Typography>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          {isEditing ? (
-            <TextField
-              value={surname}
-              onChange={(e) => setSurname(e.target.value)}
-            />
-          ) : (
-            <Typography>{surname}</Typography>
-          )}
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography variant="subtitle1">Email:</Typography>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          {isEditing ? (
-            <TextField
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          ) : (
-            <Typography>{email}</Typography>
-          )}
-        </Grid>
-        {isEditing && (
-          <>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="subtitle1">Password:</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Grid>
-          </>
-        )}
-      </Grid>
-      <div style={{ textAlign: 'center', marginTop: '20px' }}>
-        {isEditing ? (
-          <Button variant="contained" color="secondary" onClick={handleSaveClick}>
-            Save
-          </Button>
-        ) : (
-          <Button variant="contained" color="secondary" onClick={handleEditClick}>
-            Edit
-          </Button>
-        )}
-      </div>
-    </div>
+    <Box 
+      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 500 }}
+    >
+      <Tabs
+        orientation="vertical"
+        variant="scrollable"
+        value={value}
+        onChange={handleChange}
+        sx={{ borderRight: 1, borderColor: 'divider' }}
+      >
+        <Tab label="Mi Perfil" {...a11yProps(0)} />
+        <Tab label="Mis Actividades" {...a11yProps(1)} />
+        <Tab label="Mis Propuestas" {...a11yProps(2)} />
+        <Tab label="Mi Contenido Descargable" {...a11yProps(3)} />
+      </Tabs>
+      <TabPanel value={value} index={0}>
+        <MiPefil/>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Item Two
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Item Three
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        Item Four
+      </TabPanel>
+    </Box>
   );
-};
-
-export default ProfilePage;
+}
