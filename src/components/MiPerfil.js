@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { callApiNoRead } from "../helpers/apiCallNoRead";
-import { useSelector } from "react-redux";
 import { Typography, TextField, Button, Grid } from '@mui/material';
 
-const ProfilePage = () => {
+const MiPerfil = () => {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
@@ -128,4 +127,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default MiPerfil;
