@@ -4,7 +4,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { Typography  } from '@mui/material';
-import MiPefil from './MiPerfil';
+import MiPefil from '../components/MiPerfil';
+import MisActividades from '../components/MisActividades';
+import MisPropuestas from '../components/MisPropuestas';
+import MiContenidoDescargable from '../components/MiContenidoDescargable';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,6 +58,8 @@ export default function UserPage() {
         variant="scrollable"
         value={value}
         onChange={handleChange}
+        textColor="secondary"
+        indicatorColor="secondary"
         sx={{ borderRight: 1, borderColor: 'divider' }}
       >
         <Tab label="Mi Perfil" {...a11yProps(0)} />
@@ -66,13 +71,13 @@ export default function UserPage() {
         <MiPefil/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <MisActividades/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <MisPropuestas/>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Item Four
+        <MiContenidoDescargable/>
       </TabPanel>
     </Box>
   );

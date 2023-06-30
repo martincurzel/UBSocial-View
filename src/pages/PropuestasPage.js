@@ -11,7 +11,6 @@ const PropuestasPage = () => {
   const [proposals, setProposals] = useState([]);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const loginToken = useSelector((state) => state.auth.loginToken);
 
 
   //send inputs to the hook to generate the form
@@ -23,7 +22,6 @@ const PropuestasPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-
       await callApiRead("Proposal")
         .then(response => {
           setProposals(response.data)
@@ -32,15 +30,12 @@ const PropuestasPage = () => {
           // Handle any errors from the API
           console.error('Error:', error);
         });
-
     }
-
     fetchData();
-
   }, []);
 
   const addProposal = () => {
-    addCallWithModal("proposal", inputs, "Propuesta", loginToken);
+    addCallWithModal("proposal", inputs, "Propuesta");
   }
 
   const handleLoginModal = (bool) => {
@@ -72,10 +67,11 @@ const PropuestasPage = () => {
       ))}
 
       <Modal open={isLoginModalOpen} onClose={() => handleLoginModal(false)}>
-        <div style={{ backgroundColor: '#f0f0f0', width: 300, height: 280, margin: 'auto', marginTop: 100, padding: 20 }}>
-          <h4>Porfavor hace log in </h4>
+        <div className='text-center' style={{ backgroundColor: '#f0f0f0', width: 300, height: 280, margin: 'auto', marginTop: 100, padding: 20 }}>
+          <h4>Iniciar sesion </h4>
           <hr />
-          <Button variant="outlined" onClick={() => handleLoginModal(false)} color="secondary">Cerrar</Button>
+          <p>Debes iniciar sesion antes de crear una propuesta</p>
+          <Button className='mt-5' variant="outlined" onClick={() => handleLoginModal(false)} color="secondary">Aceptar</Button>
         </div>
       </Modal>
 

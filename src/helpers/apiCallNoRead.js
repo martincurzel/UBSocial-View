@@ -5,9 +5,8 @@ import ModalCU from "../components/ModalFormCU";
 
 const BASE_PATH = process.env.REACT_APP_CONTROLLER_API_BASE_PATH;
 
-export const callApiNoRead = (methodParam, url, data, token) => {
+export const callApiNoRead = (methodParam, url, data) => {
   console.log(BASE_PATH + url);
-  console.log(token);
   console.log(data);
   return axios({
     method: methodParam,
@@ -16,14 +15,14 @@ export const callApiNoRead = (methodParam, url, data, token) => {
     withCredentials: true,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "Bearer " + token
+      'Authorization': "Bearer " + localStorage.getItem('jwtToken')
     }
   })
 };
 
 
 
-export const addCallWithModal = (url, inputs, text, token) => {
+export const addCallWithModal = (url, inputs, text) => {
   withReactContent(Swal).fire({
       title: 'Agregar ' + text,
       html: <ModalCU inputs={inputs} idForm="addForm" />,
@@ -31,7 +30,7 @@ export const addCallWithModal = (url, inputs, text, token) => {
       showConfirmButton: false,
   }).then((result) => {
       if (result.isConfirmed) {
-          callApiNoReadWithModal("post", url, "#addForm", null, token);
+          callApiNoReadWithModal("post", url, "#addForm", null);
       }
   });
 }
@@ -39,7 +38,7 @@ export const addCallWithModal = (url, inputs, text, token) => {
 
 
 //This funcion call to the api with the type of method, url and id of the form where the information was completed
-const callApiNoReadWithModal = (methodParam, url, formId, idItem, token) => {
+const callApiNoReadWithModal = (methodParam, url, formId, idItem) => {
   const data = {};
   //If the request has data to submit like add student, the formId is not null and the data is saved with the input values when they are not null
   if (formId != null) {
@@ -54,7 +53,7 @@ const callApiNoReadWithModal = (methodParam, url, formId, idItem, token) => {
   if (idItem !== null) {
       data["id"] = idItem;
   }
-  callApiNoRead(methodParam, url, data, token)
+  callApiNoRead(methodParam, url, data)
   .then(response => {
     
     Swal.fire({
