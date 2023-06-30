@@ -6,9 +6,6 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { addCallWithModal } from '../helpers/apiCallNoRead';
 
-
-
-
 const PropuestasPage = () => {
 
   const [proposals, setProposals] = useState([]);
