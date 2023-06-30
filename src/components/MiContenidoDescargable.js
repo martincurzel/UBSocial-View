@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { callApiNoRead } from "../helpers/apiCallNoRead";
 
-const MisActividades = () => {
+const MiContenidoDescargable = () => {
   const [proposals, setProposals]= useState([]);
   const loginToken = localStorage.getItem('jwtToken');
 
@@ -30,10 +30,10 @@ const MisActividades = () => {
           </div>
         ))}</>
       ) : (
-        <p>No hay propuestas creadas por vos</p>
+        <p>No hay contenido descagable subido por vos</p>
       )}
     </div>
   );
 };
 
-export default MisActividades;
+export default MiContenidoDescargable;

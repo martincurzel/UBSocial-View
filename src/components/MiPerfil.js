@@ -52,9 +52,9 @@ const MiPerfil = () => {
 
   return (
     <div style={{width: 'auto', margin: 'auto'}}>
-      <div style={{ textAlign: 'center' }}>
-        <Typography variant="h2">Hola, {name}</Typography>
-        <div style={{ borderBottom: '1px solid black', margin: '10px 0' }}></div>
+      <div style={{ textAlign: 'left' }}>
+        <Typography variant="h2">Hola {name},</Typography>
+        <div style={{ borderBottom: '1px solid black', margin: 'auto' , width: '100%'}}></div>
       </div>
       <Grid container spacing={6} justifyContent="center">
         <Grid item xs={12} sm={6}>
