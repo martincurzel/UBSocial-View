@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { callApiNoRead } from "../helpers/apiCallNoRead";
 import { Button } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import Swal from 'sweetalert2';
 import withReactContent from "sweetalert2-react-content";
+import { Link } from "react-router-dom";
 
 const MiContenidoDescargable = () => {
   const [downloads, setDownloads]= useState([])
@@ -57,8 +59,16 @@ const MiContenidoDescargable = () => {
         {downloads.map((download, index) => (
           <div key={index}>
             <hr />
-            <h3>{download.title}</h3>
-            <p>{download.description}</p>
+            <Button 
+              component={Link}
+                to={"/contenido/" + download.id}
+                key={"Contenido"}
+                sx={{ my: 2, color: 'black', display: 'block' }}
+            >
+              <Typography variant="h3" sx={{ color: '#372249' }}>{download.title}</Typography>
+              <Typography variant="p" sx={{ color: '#372249' }}>{download.description}</Typography>
+            </Button>
+            
             <Button
                 onClick={() => deleteContent(download.id)} variant="outlined" color="secondary"
             >

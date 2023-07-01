@@ -4,19 +4,19 @@ import { callApiRead } from "../helpers/apiCallRead";
 import { useNavigate} from "react-router-dom";
 import { Button } from '@mui/material';
 
-const ActDetail = () => {
+const ContenidoDetail = () => {
 
     let navigate = useNavigate();
     const params = useParams();
-    const [activity, setActivity]= useState([])
+    const [content, setContent]= useState([])
 
     useEffect(() => {
         
         const fetchData = async () => {
     
-          await callApiRead("Activity/ActivityIdentifier/"+ params.id)
+          await callApiRead("downloadableContent/"+ params.id)
             .then(response => {
-              setActivity(response.data[0])
+              setContent(response.data[0])
               console.log(response)
             })
             .catch(error => {
@@ -35,13 +35,13 @@ const ActDetail = () => {
       }, [params.id]);
     
     return (
-        <div className="Act-Detail" style={{ margin: '20px' }}>
+        <div className="Content-Detail" style={{ margin: '20px' }}>
             
-            {activity && (
+            {content && (
                 <article>
-                    <h2>{activity.title}</h2>
-                    <p>{activity.URLphotos}</p>
-                    <div>{activity.description}</div>
+                    <h2>{content.title}</h2>
+                    <p>{content.URLphotos}</p>
+                    <div>{content.description}</div>
                     <Button onClick={() => navigate(-1)} variant="outlined" color="secondary">Atrás</Button>  
                 </article>
             )}
@@ -50,4 +50,4 @@ const ActDetail = () => {
     );
 }
  
-export default ActDetail;
+export default ContenidoDetail;

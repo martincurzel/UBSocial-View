@@ -11,8 +11,8 @@ const ContentLista = ({sub}) => {
 
             <Button 
               component={Link}
-                to={"/actividades/" + down.id}
-                key={"Crear Actividad"}
+                to={"/contenido/" + down.id}
+                key={"Contenido"}
                 sx={{ my: 2, color: 'black', display: 'block' }}
               >
                <h2>{down.title}</h2>
