@@ -10,7 +10,7 @@ const ContentLista = ({sub}) => {
           <div className="download-preview" key={sub.id}>
 
             <Button 
-              component={Link}
+                component={Link}
                 to={"/contenido/" + down.id}
                 key={"Contenido"}
                 sx={{ my: 2, color: 'black', display: 'block' }}

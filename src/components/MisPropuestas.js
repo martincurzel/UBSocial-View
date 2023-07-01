@@ -59,7 +59,7 @@ const MisPropuestas = () => {
           {proposals.map((proposal, index) => (
             <div key={index}>
               <hr />
-              <Grid container spacing={3} justifyContent="center" alignItems="center">
+              <Grid container spacing={3} justifyContent="center" alignItems="center" >
                 <Grid item xs={5}>
                   <Typography variant="h3" sx={{ color: '#372249' }}>{proposal.title}</Typography>
                 </Grid>

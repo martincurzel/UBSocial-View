@@ -63,6 +63,8 @@ const MiContenidoDescargable = () => {
               component={Link}
                 to={"/contenido/" + download.id}
                 key={"Contenido"}
+                variant='outlined'
+                color="secondary"
                 sx={{ my: 2, color: 'black', display: 'block' }}
             >
               <Typography variant="h3" sx={{ color: '#372249' }}>{download.title}</Typography>
