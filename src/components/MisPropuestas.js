@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import withReactContent from "sweetalert2-react-content";
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 
 const MisPropuestas = () => {
   const [proposals, setProposals]= useState([]);
@@ -60,13 +61,13 @@ const MisPropuestas = () => {
               <hr />
               <Grid container spacing={3} justifyContent="center" alignItems="center">
                 <Grid item xs={5}>
-                  <h3>{proposal.title}</h3>
+                  <Typography variant="h3" sx={{ color: '#372249' }}>{proposal.title}</Typography>
                 </Grid>
                 <Grid item xs={5}>
-                  <p>{proposal.description}</p>
+                <Typography variant="p" sx={{ color: '#372249' }}>{proposal.description}</Typography>
                 </Grid>
                 <Grid item xs={2}>
-                  <IconButton aria-label="delete" onClick={() => deleteProposal(proposal.id)} variant="outlined" color="error">
+                  <IconButton aria-label="delete" onClick={() => deleteProposal(proposal.id)} variant="outlined" sx={{ color: '#372249' }}>
                     <DeleteIcon />
                   </IconButton>
                 </Grid>
