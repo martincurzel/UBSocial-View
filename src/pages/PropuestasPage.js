@@ -43,7 +43,7 @@ const PropuestasPage = () => {
   };
 
   return (
-    <div>
+    <div style={{ margin: '20px' }}>
       <div className='row'>
         <div className='col-md-10'>
           <h1 className='mb-5'>Propuestas de la Universidad de belgrano</h1>
