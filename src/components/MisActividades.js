@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { callApiNoRead } from "../helpers/apiCallNoRead";
 import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from "sweetalert2-react-content";
 
@@ -56,8 +57,15 @@ const MisActividades = () => {
         {activities.map((activity, index) => (
           <div key={index}>
             <hr />
-            <h3>{activity.title}</h3>
-            <p>{activity.description}</p>
+            <Button 
+              component={Link}
+                to={"/actividades/" + activity.id}
+                key={"Actividad"}
+                sx={{ my: 2, color: 'black', display: 'block' }}
+              >
+               <h2>{activity.title}</h2>
+               <p>Creado por: {activity.author}</p>
+            </Button>
             <Button
                 onClick={() => deleteActivity(activity.id)} variant="outlined" color="secondary"
             >
