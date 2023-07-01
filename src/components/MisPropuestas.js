@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { callApiNoRead } from "../helpers/apiCallNoRead";
-import { Button } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import Swal from 'sweetalert2';
 import withReactContent from "sweetalert2-react-content";
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 
 const MisPropuestas = () => {
   const [proposals, setProposals]= useState([]);
@@ -50,25 +52,32 @@ const MisPropuestas = () => {
   }
 
   return (
-    <div style={{ width: 'auto', margin: 'auto' }}>
+    <div style={{ width: 'auto' }}>
       {proposals.length > 0 ? (
         <>
-        {proposals.map((proposal, index) => (
-          <div key={index}>
-            <hr />
-            <h3>{proposal.title}</h3>
-            <p>{proposal.description}</p>
-            <Button
-                onClick={() => deleteProposal(proposal.id)} variant="outlined" color="secondary"
-            >
-                {"Eliminar"}
-            </Button>
-          </div>
-        ))}</>
+          {proposals.map((proposal, index) => (
+            <div key={index}>
+              <hr />
+              <Grid container spacing={3} justifyContent="center" alignItems="center">
+                <Grid item xs={5}>
+                  <h3>{proposal.title}</h3>
+                </Grid>
+                <Grid item xs={5}>
+                  <p>{proposal.description}</p>
+                </Grid>
+                <Grid item xs={2}>
+                  <IconButton aria-label="delete" onClick={() => deleteProposal(proposal.id)} variant="outlined" color="error">
+                    <DeleteIcon />
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </div>
+          ))}
+        </>
       ) : (
         <p>No hay propuestas creadas por vos</p>
       )}
-    </div>
+  </div>
   );
 };
 

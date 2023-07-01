@@ -24,8 +24,11 @@ function App() {
   return (
     <>
       <ResponsiveAppBar />
-      <div className='container mt-5'>
-
+      <div style={{
+       display: "flex",
+       padding: "0em 0em",
+       height: '100%'
+     }}>
         <Outlet/>  
       </div>
       

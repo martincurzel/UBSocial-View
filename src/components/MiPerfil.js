@@ -54,9 +54,9 @@ const MiPerfil = () => {
     <div style={{width: 'auto', margin: 'auto'}}>
       <div style={{ textAlign: 'left' }}>
         <Typography variant="h2">Hola {name},</Typography>
-        <div style={{ borderBottom: '1px solid black', margin: 'auto' , width: '100%'}}></div>
+        <div style={{ borderBottom: '3px solid violet', margin: 'auto' , width: '100%', pb: 5}}></div>
       </div>
-      <Grid container spacing={6} justifyContent="center">
+      <Grid container spacing={6} justifyContent="center" sx={{ pt: 4, width: 200 }}>
         <Grid item xs={12} sm={6}>
           <Typography variant="subtitle1">Nombre:</Typography>
         </Grid>
@@ -112,7 +112,7 @@ const MiPerfil = () => {
           </>
         )}
       </Grid>
-      <div style={{ textAlign: 'center', marginTop: '20px' }}>
+      <div style={{ textAlign: 'left', marginTop: '30px' }}>
         {isEditing ? (
           <Button variant="contained" color="secondary" onClick={handleSaveClick}>
             Save

@@ -139,7 +139,7 @@ function ResponsiveAppBar() {
 
   return (
     <AppBar position="static" style={{ background: '#6d1b7b' }}>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" style={{ marginLeft: 0, marginRight: 0, maxWidth: "100%" }} >
         <Toolbar disableGutters>
           <Typography
             variant="h6"

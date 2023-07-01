@@ -28,7 +28,7 @@ const ContenidoPage = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ margin: '20px' }}>
       <h1>Welcome to the ContenidoPage</h1>
       <p>This is the content of the ContenidoPage.</p>
 

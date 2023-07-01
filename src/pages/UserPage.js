@@ -19,9 +19,10 @@ function TabPanel(props) {
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
+      style= {{ width: "100%" }}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ pl: 5, pt: 3, pr: 5, maxWidth: "100%" }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -51,7 +52,7 @@ export default function UserPage() {
 
   return (
     <Box 
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 500 }}
+      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '100%' }}
     >
       <Tabs
         orientation="vertical"
@@ -60,7 +61,7 @@ export default function UserPage() {
         onChange={handleChange}
         textColor="secondary"
         indicatorColor="secondary"
-        sx={{ borderRight: 1, borderColor: 'divider' }}
+        sx={{ borderRight: 1, borderColor: 'divider', height: '100vh'}}
       >
         <Tab label="Mi Perfil" {...a11yProps(0)} />
         <Tab label="Mis Actividades" {...a11yProps(1)} />

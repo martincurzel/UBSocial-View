@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { callApiNoRead } from "../helpers/apiCallNoRead";
-import ActLista from './ActLista';
+import { Button } from '@mui/material';
+import Swal from 'sweetalert2';
+import withReactContent from "sweetalert2-react-content";
 
 const MisActividades = () => {
-  const [activity, setActivity]= useState([]);
+  const [activities, setActivities]= useState([]);
   const loginToken = localStorage.getItem('jwtToken');
 
   useEffect(() => {
@@ -11,7 +13,7 @@ const MisActividades = () => {
     callApiNoRead("GET", "activity/current", null)
       .then(response => {
         console.log('Response:',response);
-        setActivity(response.data);
+        setActivities(response.data);
       })
       .catch(error => {
         // Handle any errors from the API
@@ -19,10 +21,50 @@ const MisActividades = () => {
       });
   }, [loginToken]);
 
+  const deleteActivity = (id) => {
+    callApiNoRead("DELETE", "activity/" + id, null)
+      .then(response => {
+        console.log('Response:',response);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Operacion realizada con exito!',
+          showConfirmButton: false,
+          timer: 1000
+      })
+    
+      setTimeout(function () {
+          window.location.reload();
+      }, 1150);
+      })
+      .catch(error => {
+        // Handle any errors from the API
+        const swalDelete = withReactContent(Swal);
+        swalDelete.fire({
+          icon: 'error',
+          title: error.response.data,
+          confirmButtonText: "Aceptar"
+      });
+        console.error('Error:',error);
+      });
+  }
+
   return (
     <div style={{ width: 'auto', margin: 'auto' }}>
-      {activity.length > 0 ? (
-        <ActLista acts={activity} title="Todas las Actividades" />
+      {activities.length > 0 ? (
+        <>
+        {activities.map((activity, index) => (
+          <div key={index}>
+            <hr />
+            <h3>{activity.title}</h3>
+            <p>{activity.description}</p>
+            <Button
+                onClick={() => deleteActivity(activity.id)} variant="outlined" color="secondary"
+            >
+                {"Eliminar"}
+            </Button>
+          </div>
+        ))}</>
       ) : (
         <p>No hay actividades creadas por vos</p>
       )}
