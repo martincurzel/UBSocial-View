@@ -116,14 +116,15 @@ function ResponsiveAppBar() {
           .then(response => {
             let userId = email;
             let loginToken = response.data;
-            console.log('Response:',response);
+            console.log('Response signup:',response);
+            localStorage.setItem('jwtToken', loginToken);
             dispatch(login({ userId , loginToken}));
             handleCloseSignupModal();
           })
           .catch(error => {
             // Handle any errors from the API
             setErrorMessage(error.response.data);
-            console.error('Error:',error);
+            console.error('Error login:',error);
           });
       })
       .catch(error => {
