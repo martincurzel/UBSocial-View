@@ -1,7 +1,44 @@
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
+import { callApiRead } from "../helpers/apiCallRead";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const ContentLista = ({sub}) => {
+  const[down, setContent] = useState([]);
+
+  const handleDownloadContent = () => {
+       callApiRead("DownloadableContent")
+        .then(response => {
+          setContent(response.data)
+          console.log(response)
+        })
+        .catch(error => {
+          // Handle any errors from the API
+          console.error('Error:', error);
+        });
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+
+      await callApiRead("DownloadableContent")
+        .then(response => {
+          setContent(response.data)
+          console.log(response)
+        })
+        .catch(error => {
+          // Handle any errors from the API
+          console.error('Error:', error);
+        });
+
+    }
+
+    fetchData();
+
+  }, []);
+
+
     
     return (
         <div className="content-lista">
@@ -14,12 +51,12 @@ const ContentLista = ({sub}) => {
                 to={"/contenido/" + down.id}
                 key={"Contenido"}
                 sx={{ my: 2, color: 'black', display: 'block' }}
-              >
+            <Typography sx={{ my: 2, color: 'black', display: 'block' }}>
                <h2>{down.title}</h2>
-               <p>Creado por: {down.author}</p>
-
+             
+              <Button onClick={handleDownloadContent()}>Descargar</Button>
               
-            </Button>
+            </Typography>
             
           </div>
             ))}

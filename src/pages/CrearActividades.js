@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { callApiNoReadFormData } from "../helpers/apiCallNoRead";
+import { useSelector } from "react-redux";
 import { Button } from "@mui/material";
 
 
@@ -16,6 +17,8 @@ const CrearActividades = () => {
     
     
     
+
+   
     function handleImageUpload(e) {
         const file = e.target.files[0];
         if (file && file.type.substr(0, 5) === "image") {
@@ -42,7 +45,7 @@ const CrearActividades = () => {
         callApiNoReadFormData("POST","Activity", formData)
       }
 
-
+    
 
     return(
         <div className="Crear">
