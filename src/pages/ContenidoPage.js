@@ -96,7 +96,7 @@ const ContenidoPage = () => {
               )}
             </div>
           </div>
-          <ContentLista sub={download} title="Todas las Actividades" />
+          <ContentLista sub={download} deleteFlag={false} title="Todas las Actividades" />
           <Modal open={isLoginModalOpen} onClose={() => handleLoginModal(false)}>
             <div className='text-center' style={{ backgroundColor: '#f0f0f0', width: 300, height: 280, margin: 'auto', marginTop: 100, padding: 20 }}>
               <h4>Iniciar sesion </h4>

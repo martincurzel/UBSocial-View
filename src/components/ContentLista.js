@@ -5,8 +5,9 @@ import { useSelector } from "react-redux";
 import Modal from '@mui/material/Modal';
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { callApiNoRead } from "../helpers/apiCallNoRead";
 
-const ContentLista = ({ sub }) => {
+const ContentLista = ({ sub, deleteFlag }) => {
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -36,6 +37,34 @@ const ContentLista = ({ sub }) => {
       });
   }
 
+  const deleteContent = (id) => {
+    callApiNoRead("DELETE", "downloadableContent/" + id, null)
+      .then(response => {
+        console.log('Response:',response);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Operacion realizada con exito!',
+          showConfirmButton: false,
+          timer: 1000
+      })
+    
+      setTimeout(function () {
+          window.location.reload();
+      }, 1150);
+      })
+      .catch(error => {
+        // Handle any errors from the API
+        const swalDelete = withReactContent(Swal);
+        swalDelete.fire({
+          icon: 'error',
+          title: error.response.data,
+          confirmButtonText: "Aceptar"
+      });
+        console.error('Error:',error);
+      });
+  }
+
   const handleLoginModal = (bool) => {
     setIsLoginModalOpen(bool);
   };
@@ -43,7 +72,6 @@ const ContentLista = ({ sub }) => {
   return (
 
     <div className="content-lista">
-
       <main className="container">
         <table className="table mt-3 table-hover">
           <thead>
@@ -66,15 +94,18 @@ const ContentLista = ({ sub }) => {
                     <Button onClick={() => handleLoginModal(true)} variant="outlined" color="secondary">Descargar</Button>
                   </td>
                 )}
-
-
+                {deleteFlag ? (
+                  <td>
+                    <Button onClick={() => deleteContent(item.id)} variant="outlined" color="error">Eliminar</Button>
+                  </td>) : (
+                  <>
+                  </>
+                )}
               </tr>
             ))}
           </tbody>
         </table>
-
       </main>
-
       <Modal open={isLoginModalOpen} onClose={() => handleLoginModal(false)}>
         <div className='text-center' style={{ backgroundColor: '#f0f0f0', width: 300, height: 280, margin: 'auto', marginTop: 100, padding: 20 }}>
           <h4>Iniciar sesion </h4>
@@ -83,9 +114,6 @@ const ContentLista = ({ sub }) => {
           <Button className='mt-5' variant="outlined" onClick={() => handleLoginModal(false)} color="secondary">Aceptar</Button>
         </div>
       </Modal>
-
-
-
     </div>
   );
 }
