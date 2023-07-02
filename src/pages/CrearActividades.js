@@ -4,12 +4,9 @@ import { callApiNoReadFormData } from "../helpers/apiCallNoRead";
 import { useSelector } from "react-redux";
 import { Button } from "@mui/material";
 
-
-
 const CrearActividades = () => {
     const [Title, setTitulo] = useState("");
     const [Description, setDesc] = useState("");
-    const [File, setFoto] = useState("");
     const [Contact, setContancto] = useState("");
     const [ActivityDateFinished, setFecha] = useState ("");
     const [image, setImage] = useState(null);
@@ -26,15 +23,16 @@ const CrearActividades = () => {
         } else {
           setImage(null);
         }
-      }
-      function handlesubmit(e) {
+    }
+
+    function handlesubmit(e) {
         e.preventDefault();
         setPreview(URL.createObjectURL(image));
         const formData = new FormData();
         formData.append('Title', Title);
         formData.append('Description', Description);
         formData.append('Contact',Contact)
-        formData.append('ActivityDateFinished', '25-09-2023')
+        formData.append('ActivityDateFinished', ActivityDateFinished)
         formData.append('File', image)
 
         

@@ -63,6 +63,9 @@ const MiPerfil = () => {
         <Grid item xs={12} sm={6}>
           {isEditing ? (
             <TextField
+              sx={{
+                width: 300
+              }}
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -76,6 +79,9 @@ const MiPerfil = () => {
         <Grid item xs={12} sm={6}>
           {isEditing ? (
             <TextField
+              sx={{
+                width: 300
+              }}
               value={surname}
               onChange={(e) => setSurname(e.target.value)}
             />
@@ -89,6 +95,9 @@ const MiPerfil = () => {
         <Grid item xs={12} sm={6}>
           {isEditing ? (
             <TextField
+              sx={{
+                width: 300
+              }}
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -104,6 +113,9 @@ const MiPerfil = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                sx={{
+                  width: 300
+                }}
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

@@ -6,9 +6,6 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { addCallWithModal } from '../helpers/apiCallNoRead';
 
-
-
-
 const PropuestasPage = () => {
 
   const [proposals, setProposals] = useState([]);
@@ -28,7 +25,6 @@ const PropuestasPage = () => {
       await callApiRead("Proposal")
         .then(response => {
           setProposals(response.data)
-          console.log(response)
         })
         .catch(error => {
           // Handle any errors from the API

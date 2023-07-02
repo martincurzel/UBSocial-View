@@ -20,7 +20,7 @@ import { callApiNoRead } from "./helpers/apiCallNoRead";
 const pages = [
   { name: 'Actividades', route: '/actividades' },
   { name: 'Propuestas', route: '/propuestas' },
-  { name: 'Contenido Descargable', route: '/contenido' }
+  { name: 'Contenido Descargable', route: '/materias' }
 ];
 
 const perfil = {
