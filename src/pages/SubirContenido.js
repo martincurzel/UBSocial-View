@@ -1,79 +1,79 @@
 import React from "react";
 import { useState } from "react";
 import { callApiNoReadFormData } from "../helpers/apiCallNoRead";
+import { useParams, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { Button } from "@mui/material";
 
+
 const SubirContenido = () => {
+    const {idSubject} = useParams();
     const [Title, setTitulo] = useState("");
-    const [Description, setDesc] = useState("");
-    const [Contact, setContancto] = useState("");
-    const [file, setFile] = useState(null);
-    
+    const [file, setFile] = useState(null);    
+    const navigate = useNavigate();
+
     function handleImageUpload(e) {
         const file = e.target.files[0];
-        if (file && file.type.substr(0, 5) === "file") {
-          setFile(file);
-        } else {
-            setFile(null);
-        }
+          setFile(file);        
     }
+    const handlesubmit = async (e) => {
 
-    function handlesubmit(e) {
+        
+
         e.preventDefault();
         const formData = new FormData();
         formData.append('Title', Title);
-        formData.append('Description', Description);
-        formData.append('Contact',Contact)
         formData.append('File', file)
-
+        formData.append('idSubject', idSubject)
         
         for (let pair of formData.entries()) {
             console.log(pair[0]+ ', '+ pair[1]); 
         }
-        callApiNoReadFormData("POST","Activity", formData)
+        await callApiNoReadFormData("POST","downloadableContent", formData)
+        .then(response => {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Operacion realizada con exito!',
+                showConfirmButton: false,
+                timer: 1000
+            })
+          
+            setTimeout(function () {
+                navigate("/contenidos/" + idSubject);
+            }, 1150);
+          })
+          .catch(error => {
+            // Handle any errors from the API
+            console.error('Error:', error);
+          });
+        
       }
 
 
 
     return(
-        <div className="Crear">
+        <div className="Crear mt-5">
+            <hr/>
             <h1>Subir Contenido</h1>
-            <form onSubmit={handlesubmit}>
-                <label >Titulo del contenido</label>
+            <form className="mt-5" onSubmit={handlesubmit}>
+                <label>Titulo del contenido</label>
                 <input 
                 type="text"
                 required 
                 value={Title}
                 onChange={(e) => setTitulo(e.target.value)}
                 />
-                <label >Descripcion:</label>
-                <textarea
-                required
-                value={Description}
-                onChange={(e) => setDesc(e.target.value)}  
-                />
-                <label>Contacto</label>
-                <input
-                 type="text"
-                 required 
-                 value={Contact}
-                 onChange={(e) => setContancto(e.target.value)}
-                /> 
-                <label >Archivo</label>
-                <Button
-                variant="contained"
-                component="label"
+               
+                <label className="mt-3">Subir Archivo</label>
                 
-                >
 
-                Subir Archivo
                 <input type="file" accept="*" onChange={handleImageUpload} />
 
 
-                </Button>
-                
-                <button>Terminado</button>
+                <Button className="mt-5" type="submit" variant="outlined" color="secondary">Enviar</Button>
             </form>
+            <hr/>
         </div>
     );
     

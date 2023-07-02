@@ -51,14 +51,6 @@ code {
   box-sizing: border-box;
   display: block;
 }
-.Crear button {
-  background: #f1356d;
-  color: #fff;
-  border: 0;
-  padding: 8px;
-  border-radius: 8px;
-  cursor: pointer;
-}
 
 .act-preview{
  text-decoration: none;  
