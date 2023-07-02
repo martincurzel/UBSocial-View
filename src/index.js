@@ -14,7 +14,7 @@ import ActDetail from './pages/ActDetail.js';
 import ContenidoDetail from './pages/ContenidoDetail.js';
 import { Provider } from "react-redux";
 import store from "./store";
-import SubirContent from './pages/SubirContent.js';
+import SubirContenido from './pages/SubirContenido.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -31,7 +31,7 @@ root.render(
             <Route path='perfil' element={<UserPage/>} />
             <Route path='perfil' element={<PerfilPage/>} />
             <Route path='crear_a' element={<CrearActividades/>}/>
-            <Route path='subir_c' element={<SubirContent />}/>
+            <Route path='subir_c' element={<SubirContenido />}/>
             
           </Route>
         </Routes>
