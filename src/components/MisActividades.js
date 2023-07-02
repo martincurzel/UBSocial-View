@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { callApiNoRead } from "../helpers/apiCallNoRead";
 import { Button } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from "sweetalert2-react-content";
 
@@ -56,13 +59,28 @@ const MisActividades = () => {
         {activities.map((activity, index) => (
           <div key={index}>
             <hr />
-            <h3>{activity.title}</h3>
-            <p>{activity.description}</p>
-            <Button
-                onClick={() => deleteActivity(activity.id)} variant="outlined" color="secondary"
-            >
+            <Grid container spacing={3} justifyContent="left" alignItems="center">
+              <Grid item xs={5}>
+                <Button 
+                  component={Link}
+                  to={"/actividades/" + activity.id}
+                  key={"Actividad"}
+                  variant="outlined"
+                  color="secondary"
+                  sx={{ my: 2, color: '#372249', display: 'block' }}
+                >
+                <Typography variant="h2" sx={{ color: '#372249' }}>{activity.title}</Typography>
+                <Typography variant="p" sx={{ color: '#372249' }}>Creado por: {activity.author}</Typography>
+                </Button>
+              </Grid>
+              <Grid item xs={2}>
+                <Button
+                  onClick={() => deleteActivity(activity.id)} variant="outlined" color="secondary" sx={{ my: 2, color: '#372249', display: 'block' }}
+                >
                 {"Eliminar"}
-            </Button>
+                </Button>
+              </Grid>
+            </Grid>
           </div>
         ))}</>
       ) : (

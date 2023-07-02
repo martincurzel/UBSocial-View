@@ -3,37 +3,32 @@ import { useState } from "react";
 import { callApiNoReadFormData } from "../helpers/apiCallNoRead";
 import { Button } from "@mui/material";
 
-const CrearActividades = () => {
+const SubirContenido = () => {
     const [Title, setTitulo] = useState("");
     const [Description, setDesc] = useState("");
     const [Contact, setContancto] = useState("");
-    const [ActivityDateFinished, setFecha] = useState ("");
-    const [image, setImage] = useState(null);
-    const [preview, setPreview] = useState(null);
+    const [file, setFile] = useState(null);
     
     function handleImageUpload(e) {
         const file = e.target.files[0];
-        if (file && file.type.substr(0, 5) === "image") {
-          setImage(file);
+        if (file && file.type.substr(0, 5) === "file") {
+          setFile(file);
         } else {
-          setImage(null);
+            setFile(null);
         }
     }
 
     function handlesubmit(e) {
         e.preventDefault();
-        setPreview(URL.createObjectURL(image));
         const formData = new FormData();
         formData.append('Title', Title);
         formData.append('Description', Description);
         formData.append('Contact',Contact)
-        formData.append('ActivityDateFinished', ActivityDateFinished)
-        formData.append('File', image)
+        formData.append('File', file)
 
         
         for (let pair of formData.entries()) {
             console.log(pair[0]+ ', '+ pair[1]); 
-
         }
         callApiNoReadFormData("POST","Activity", formData)
       }
@@ -42,10 +37,9 @@ const CrearActividades = () => {
 
     return(
         <div className="Crear">
-            <h1>Crear Actividades</h1>
-            <h2>Crear nueva actividad</h2>
+            <h1>Subir Contenido</h1>
             <form onSubmit={handlesubmit}>
-                <label >Titulo de la actividad</label>
+                <label >Titulo del contenido</label>
                 <input 
                 type="text"
                 required 
@@ -65,14 +59,7 @@ const CrearActividades = () => {
                  value={Contact}
                  onChange={(e) => setContancto(e.target.value)}
                 /> 
-                <label>Fecha de Finalizacion</label>
-                <input
-                type="date"
-                required 
-                value={ActivityDateFinished}
-                onChange={(e) => setFecha(e.target.value)}
-                />
-                <label >Foto de la Actividad</label>
+                <label >Archivo</label>
                 <Button
                 variant="contained"
                 component="label"
@@ -80,23 +67,16 @@ const CrearActividades = () => {
                 >
 
                 Subir Archivo
-                <input type="file" accept="image/*" onChange={handleImageUpload} />
+                <input type="file" accept="*" onChange={handleImageUpload} />
 
 
                 </Button>
                 
-                <button>Crear Actividad</button>
-                <h2>Preview</h2>
-                <p>{Title}</p>
-                <p>{Description}</p>
-                <p>{Contact}</p>
-                <p>{ActivityDateFinished}</p>
-                <p>{File}</p>
-                {preview && <img src={preview} alt="Preview" />}
+                <button>Terminado</button>
             </form>
         </div>
     );
     
 };
 
-export default CrearActividades;
+export default SubirContenido;

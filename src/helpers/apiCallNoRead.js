@@ -20,6 +20,23 @@ export const callApiNoRead = (methodParam, url, data) => {
   })
 };
 
+export const callApiNoReadFormData = (methodParam, url, data) => {
+  console.log(BASE_PATH + url);
+  for (let pair of data.entries()) {
+    console.log(pair[0]+ ', '+ pair[1]); 
+
+    }
+  return axios({
+    method: methodParam,
+    url: BASE_PATH + url,
+    data: data,
+    withCredentials: true,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': "Bearer " + localStorage.getItem('jwtToken')
+    }
+  })
+};
 
 
 export const addCallWithModal = (url, inputs, text) => {
