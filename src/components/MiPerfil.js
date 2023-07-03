@@ -3,7 +3,7 @@ import { callApiNoRead } from "../helpers/apiCallNoRead";
 import { Typography, TextField, Button, Grid } from '@mui/material';
 
 const MiPerfil = () => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState(null);
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -56,7 +56,7 @@ const MiPerfil = () => {
 
   return (
     <div style={{width: 'auto', margin: 'auto'}}>
-      {name == '' ? (
+      {name == null ? (
       <>
         <span>cargando...</span>
       </>
