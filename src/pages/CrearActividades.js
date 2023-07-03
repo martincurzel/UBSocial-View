@@ -4,6 +4,8 @@ import { callApiNoReadFormData } from "../helpers/apiCallNoRead";
 import { Button, Box } from "@mui/material";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useNavigate } from 'react-router-dom';
+
 
 const CrearActividades = () => {
     const [Title, setTitulo] = useState("");
@@ -11,6 +13,8 @@ const CrearActividades = () => {
     const [Contact, setContancto] = useState("");
     const [ActivityDateFinished, setFecha] = useState("");
     const [image, setImage] = useState(null);
+    const navigate = useNavigate();
+
 
     function handleImageUpload(e) {
         const file = e.target.files[0];
@@ -42,8 +46,8 @@ const CrearActividades = () => {
           })
         
           setTimeout(function () {
-              window.location.reload();
-          }, 1150);
+            navigate('/actividades');
+        }, 1150);
         
           }).catch(error => {
             const swalDelete = withReactContent(Swal)

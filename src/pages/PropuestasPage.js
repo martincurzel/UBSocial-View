@@ -29,7 +29,6 @@ const PropuestasPage = () => {
         })
         .catch(error => {
           // Handle any errors from the API
-          console.error('Error:', error);
         });
     }
     fetchData();

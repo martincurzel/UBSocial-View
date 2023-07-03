@@ -2,9 +2,9 @@
 const NoPage = () => {   
     
     return (
-        <div className="Act-Detail" style={{ margin: '20px' }}>
-            
-           no page
+        
+        <div className="container text-center">
+            <h1 className="mt-5">Ups! Error 404 pagina no encontrada :v</h1>
         </div>
         
     );

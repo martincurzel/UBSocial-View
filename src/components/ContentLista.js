@@ -18,37 +18,37 @@ const ContentLista = ({ sub, deleteFlag, fetchContent }) => {
         const urlAux = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement('a');
         link.href = urlAux;
-        link.setAttribute('download', url); // o cualquier otro nombre de archivo que desees
+        link.setAttribute('download', url.split("\\").pop()); // o cualquier otro nombre de archivo que desees
         document.body.appendChild(link);
-        link.click();      })
+        link.click();
+
+      })
       .catch(error => {
         // Handle any errors from the API
-        console.error('Error:', error);
 
-        if(error.response.status === 429){
+        if (error.response.status === 429) {
           const swalDelete = withReactContent(Swal)
           swalDelete.fire({
-              icon: 'error',
-              title: error.response.data,
-              confirmButtonText: "Aceptar"
+            icon: 'error',
+            title: "Debes subir un archivo para descargar otros 3",
+            confirmButtonText: "Aceptar"
           })
         }
-      
+
       });
   }
 
   const deleteContent = (id) => {
     callApiNoRead("DELETE", "downloadableContent/" + id, null)
       .then(response => {
-        console.log('Response:',response);
         Swal.fire({
-          position: 'top-end',
+          position: 'center',
           icon: 'success',
           title: 'Operacion realizada con exito!',
           showConfirmButton: false,
           timer: 1000
-      })
-      fetchContent();
+        })
+        fetchContent();
       })
       .catch(error => {
         // Handle any errors from the API
@@ -57,8 +57,7 @@ const ContentLista = ({ sub, deleteFlag, fetchContent }) => {
           icon: 'error',
           title: error.response.data,
           confirmButtonText: "Aceptar"
-      });
-        console.error('Error:',error);
+        });
       });
   }
 

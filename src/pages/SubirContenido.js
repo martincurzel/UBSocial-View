@@ -26,9 +26,6 @@ const SubirContenido = () => {
         formData.append('File', file)
         formData.append('idSubject', idSubject)
         
-        for (let pair of formData.entries()) {
-            console.log(pair[0]+ ', '+ pair[1]); 
-        }
         await callApiNoReadFormData("POST","downloadableContent", formData)
         .then(response => {
             Swal.fire({
@@ -45,7 +42,6 @@ const SubirContenido = () => {
           })
           .catch(error => {
             // Handle any errors from the API
-            console.error('Error:', error);
           });
         
       }

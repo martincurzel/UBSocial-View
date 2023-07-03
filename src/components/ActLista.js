@@ -56,6 +56,7 @@ const ActLista = (props) => {
                 {act.isJoined === null ? (
                 <>
                 </>
+                // eslint-disable-next-line
                 ) : act.isJoined == false ? (
                 <>
                   <Button onClick={() => handleJoin(act)} size="small" color="primary">
