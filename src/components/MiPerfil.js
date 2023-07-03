@@ -3,7 +3,7 @@ import { callApiNoRead } from "../helpers/apiCallNoRead";
 import { Typography, TextField, Button, Grid } from '@mui/material';
 
 const MiPerfil = () => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState(null);
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,6 +30,10 @@ const MiPerfil = () => {
     setIsEditing(true);
   };
 
+  const handleCancelClick = () => {
+    setIsEditing(false);
+  };
+
   const handleSaveClick = () => {
     // Perform save operation here, e.g., make an API call to update the profile
     let user = {
@@ -52,59 +56,64 @@ const MiPerfil = () => {
 
   return (
     <div style={{width: 'auto', margin: 'auto'}}>
-      <div style={{ textAlign: 'left' }}>
-        <Typography variant="h2">Hola {name},</Typography>
-        <div style={{ borderBottom: '3px solid violet', margin: 'auto' , width: '100%', pb: 5}}></div>
+      {name === null ? (
+      <>
+        <span>cargando...</span>
+      </>
+      ) : (
+      <>
+      <div style={{display: 'flex', alignItems: 'center'}}>
+        <Typography variant="h2">Hola {name}</Typography>
+        {isEditing ? (
+          <>
+          </>
+        ) : (
+          <Button variant="contained" color="secondary" onClick={handleEditClick} style={{ marginLeft: '30px' }}>
+            Edit
+          </Button>
+        )}
       </div>
-      <Grid container spacing={6} justifyContent="center" sx={{ pt: 4, width: 200 }}>
+      <div style={{ borderBottom: '3px solid violet', margin: 'auto' , width: '100%', pb: 5}}></div>
+      <Grid container spacing={6} justifyContent="center" alignItems="center" sx={{ pt: 4, width: 200 }}>
         <Grid item xs={12} sm={6}>
           <Typography variant="subtitle1">Nombre:</Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
-          {isEditing ? (
-            <TextField
-              sx={{
-                width: 300
-              }}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          ) : (
-            <Typography>{name}</Typography>
-          )}
+          <TextField
+            disabled={!isEditing}
+            variant='standard'
+            color= 'secondary'
+            sx={isEditing ? { width: 300 } : { width: 300, border: 'none', margin: 0 }}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography variant="subtitle1">Apellido:</Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
-          {isEditing ? (
-            <TextField
-              sx={{
-                width: 300
-              }}
-              value={surname}
-              onChange={(e) => setSurname(e.target.value)}
-            />
-          ) : (
-            <Typography>{surname}</Typography>
-          )}
+          <TextField
+            disabled={!isEditing}
+            variant='standard'
+            color= 'secondary'
+            sx={isEditing ? { width: 300 } : { width: 300, border: 'none', margin: 0 }}
+            value={surname}
+            onChange={(e) => setSurname(e.target.value)}
+          />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography variant="subtitle1">Email:</Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
-          {isEditing ? (
-            <TextField
-              sx={{
-                width: 300
-              }}
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          ) : (
-            <Typography>{email}</Typography>
-          )}
+          <TextField
+            disabled={!isEditing}
+            variant='standard'
+            color= 'secondary'
+            sx={isEditing ? { width: 300 } : { width: 300, border: 'none', margin: 0 }}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </Grid>
         {isEditing && (
           <>
@@ -113,9 +122,10 @@ const MiPerfil = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                sx={{
-                  width: 300
-                }}
+                disabled={!isEditing}
+                variant='standard'
+                color= 'secondary'
+                sx={isEditing ? { width: 300 } : { width: 300, border: 'none', margin: 0 }}
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -126,15 +136,20 @@ const MiPerfil = () => {
       </Grid>
       <div style={{ textAlign: 'left', marginTop: '30px' }}>
         {isEditing ? (
-          <Button variant="contained" color="secondary" onClick={handleSaveClick}>
-            Save
-          </Button>
-        ) : (
-          <Button variant="contained" color="secondary" onClick={handleEditClick}>
-            Edit
-          </Button>
+            <>
+                <Button variant="outlined" color="secondary" onClick={handleCancelClick} style={{ marginRight: '10px' }}>
+                  Cancelar
+                </Button>
+                <Button variant="contained" color="secondary" onClick={handleSaveClick} style={{ marginLeft: '10px' }}>
+                  Save
+                </Button>
+            </>
+          ) : (
+          <></>
         )}
       </div>
+      </>
+      )}
     </div>
   );
 };

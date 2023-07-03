@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
 const MisPropuestas = () => {
-  const [proposals, setProposals]= useState([]);
+  const [proposals, setProposals]= useState(null);
   const loginToken = localStorage.getItem('jwtToken');
 
   const fetchProposal = () => {
@@ -55,8 +55,13 @@ const MisPropuestas = () => {
 
   return (
     <div style={{ width: 'auto' }}>
-      {proposals.length > 0 ? (
+      {proposals == null ? (
+      <>
+        <span>cargando...</span>
+      </>
+      ) : proposals.length > 0 ? (
         <>
+          <Typography variant="h3" sx={{ color: '#372249' }}>Mis Propuestas:</Typography>
           {proposals.map((proposal, index) => (
             <div key={index}>
               <hr />

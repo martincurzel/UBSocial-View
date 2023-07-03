@@ -4,11 +4,25 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import { callApiNoRead } from '../helpers/apiCallNoRead';
 
 
 const ActLista = (props) => {
 
   const BASE_PATH = process.env.REACT_APP_CONTROLLER_API_BASE_PATH;
+
+  const handleJoin = (act) => {
+    callApiNoRead("POST", "Activity/join/" + act.id, null)
+      .then(response => {
+        const updatedisJoined = act.isJoined === null ? true : !act.isJoined;
+        props.handleJoin(act.id, updatedisJoined);
+      })
+      .catch(error => {
+        // Handle any errors from the API
+        console.error('Error:', error);
+      });
+
+  };
 
 
   return (
@@ -39,6 +53,23 @@ const ActLista = (props) => {
                 <Button component={Link} to={"/actividades/" + act.id} size="small" color="primary">
                   ver
                 </Button>
+                {act.isJoined === null ? (
+                <>
+                </>
+                ) : act.isJoined == false ? (
+                <>
+                  <Button onClick={() => handleJoin(act)} size="small" color="primary">
+                    unirme
+                  </Button>
+                </>
+                ) : (
+                <>
+                  <Button onClick={() => handleJoin(act)} size="small" color="primary">
+                    dejar
+                  </Button>
+                </>
+                )}
+                
               </CardActions>
             </Card>
           </div>

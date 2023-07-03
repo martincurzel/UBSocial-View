@@ -1,20 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { callApiRead } from "../helpers/apiCallRead";
-import { useNavigate } from "react-router-dom";
-import { Button } from '@mui/material';
 import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
-import { ImportantDevices } from "@mui/icons-material";
 
 const ActDetail = () => {
 
-  let navigate = useNavigate();
   const params = useParams();
-  const [activity, setActivity] = useState([])
-
+  const [activity, setActivity] = useState([]);
   const BASE_PATH = process.env.REACT_APP_CONTROLLER_API_BASE_PATH;
-
 
   useEffect(() => {
 

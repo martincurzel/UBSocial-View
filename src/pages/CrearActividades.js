@@ -11,7 +11,6 @@ const CrearActividades = () => {
     const [Contact, setContancto] = useState("");
     const [ActivityDateFinished, setFecha] = useState("");
     const [image, setImage] = useState(null);
-    const [preview, setPreview] = useState(null);
 
     function handleImageUpload(e) {
         const file = e.target.files[0];
@@ -24,7 +23,6 @@ const CrearActividades = () => {
 
     function handlesubmit(e) {
         e.preventDefault();
-        setPreview(URL.createObjectURL(image));
         const formData = new FormData();
         formData.append('Title', Title);
         formData.append('Description', Description);

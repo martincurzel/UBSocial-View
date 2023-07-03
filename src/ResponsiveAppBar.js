@@ -49,6 +49,16 @@ function ResponsiveAppBar() {
   };
   const handleLogout = () => {
     localStorage.removeItem('jwtToken');
+    const currentPath = window.location.pathname;
+    const isPerfilPage = currentPath.endsWith("/perfil");
+
+    if (isPerfilPage) {
+      // If on "/perfil" page, navigate to the root page
+      window.location.href = "/";
+    } else {
+      // If not on "/perfil" page, refresh the current page
+      window.location.reload();
+    }
     dispatch(logout());
   };
 
@@ -80,6 +90,7 @@ function ResponsiveAppBar() {
         console.log('Response:',response);
         localStorage.setItem('jwtToken', loginToken);
         dispatch(login({ userId , loginToken}));
+        window.location.reload();
         handleCloseLoginModal();
       })
       .catch(error => {
@@ -119,6 +130,7 @@ function ResponsiveAppBar() {
             console.log('Response signup:',response);
             localStorage.setItem('jwtToken', loginToken);
             dispatch(login({ userId , loginToken}));
+            window.location.reload();
             handleCloseSignupModal();
           })
           .catch(error => {
