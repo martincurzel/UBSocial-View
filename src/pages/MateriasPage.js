@@ -39,29 +39,39 @@ const MateriasPage = () => {
 
   return (
     <div>
-      <main className="container">
-        <input type="text" id="searchInput" placeholder="Buscar Materia" className="form-control mt-4" onChange={handleFilter} />
-        <table className="table mt-3 table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Nombre</th>
-              <th scope="col">ir</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtredData.map((item) => (
-              <tr key={item.id}>
-                <td className="col-md-5">{item.name}</td>
-                <td>
-                  <Link to={"/contenidos/" + item.id} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <Button variant="outlined" color="secondary">Archivos</Button>
-                  </Link>
-                </td>
+      <main className="container ">
 
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className='row justify-content-center'>
+          <input type="text" id="searchInput" placeholder="Buscar Materia" className="form-control mt-4 w-50" onChange={handleFilter} />
+        </div>
+
+        <div className='row justify-content-center'>
+
+          <div className='col-md-6'>
+            <table className="table mt-5 table-hover w-100">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {filtredData.map((item) => (
+                  <tr key={item.id}>
+                    <td className="col-md-6 ">{item.name}</td>
+                    <td className='text-end'>
+                      <Link to={"/contenidos/" + item.id} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <Button variant="outlined" color="secondary">Archivos</Button>
+                      </Link>
+                    </td>
+
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
 
       </main>
 

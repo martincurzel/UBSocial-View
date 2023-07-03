@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { addCallWithModal } from '../helpers/apiCallNoRead';
+import { Typography } from '@mui/material';
 
 const PropuestasPage = () => {
 
@@ -45,12 +46,12 @@ const PropuestasPage = () => {
   return (
     <div style={{ margin: '20px' }}>
       <div className='row'>
-        <div className='col-md-10'>
-          <h1 className='mb-5'>Propuestas de la Universidad de belgrano</h1>
+        <div className='col-md-10 mt-3'>
+          <Typography className="mb-5" variant="h4">Propuestas de la Universidad de Belgrano</Typography>
         </div>
         <div className='col-md-2 mt-3'>
           {isLoggedIn ? (
-              <Button onClick={() => addProposal(true)} variant="outlined" color="secondary">Crear</Button>
+            <Button onClick={() => addProposal(true)} variant="outlined" color="secondary">Crear</Button>
           ) : (
             <Button onClick={() => handleLoginModal(true)} variant="outlined" color="secondary">Crear</Button>
           )}
