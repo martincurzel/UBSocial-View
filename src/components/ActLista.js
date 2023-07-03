@@ -56,7 +56,7 @@ const ActLista = (props) => {
                 {act.isJoined === null ? (
                 <>
                 </>
-                ) : act.isJoined === false ? (
+                ) : act.isJoined == false ? (
                 <>
                   <Button onClick={() => handleJoin(act)} size="small" color="primary">
                     unirme
