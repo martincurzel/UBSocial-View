@@ -15,6 +15,7 @@ const ActLista = (props) => {
     callApiNoRead("POST", "Activity/join/" + act.id, null)
       .then(response => {
         const updatedisJoined = act.isJoined === null ? true : !act.isJoined;
+        console.log(updatedisJoined);
         props.handleJoin(act.id, updatedisJoined);
       })
       .catch(error => {

@@ -14,6 +14,9 @@ const ActividadesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSearchActive, setIsSearchActive] = useState(false);
+  const [searchTermStatic, setSearchTermStatic] = useState('');
+  const [searchError, setSearchError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,14 +37,14 @@ const ActividadesPage = () => {
 
   }, []);
 
-  const handleJoin = (activityId, areuJoined) => {
+  const handleJoin = (activityId, isJoined) => {
     // Make API call to update the AreuJoined property of the activity
     // ...
   
     // Update the activity list in the state
     const updatedActivity = activity.map((item) => {
       if (item.id === activityId) {
-        return { ...item, AreuJoined: areuJoined };
+        return { ...item, isJoined: isJoined };
       }
       return item;
     });
@@ -56,15 +59,22 @@ const ActividadesPage = () => {
     setIsLoginModalOpen(bool);
   };
 
+  const handleCloseSearch = (bool) => {
+    window.location.reload();
+  };
 
   const handleClickSearch = async (e) => {
+    setSearchError(null);
     await callApiRead("Activity/currentTitle/" + searchTerm)
       .then(response => {
-        setActivity(response.data)
-        console.log(response)
+        setActivity(response.data);
+        setIsSearchActive(true);
+        setSearchTermStatic(searchTerm);
+        console.log(response);
       })
       .catch(error => {
         // Handle any errors from the API
+        setSearchError(error.response.data);
         console.error('Error:', error);
       });
 
@@ -104,6 +114,28 @@ const ActividadesPage = () => {
         </div>
 
       </div>
+      {searchError === null ? (
+      <>
+      </>
+      ) : (
+      <>
+        <Typography variant="p" sx={{ color: '#ff0000' }}>{searchError}</Typography>
+      </>)}
+      {isSearchActive === false ? (
+      <>
+      </>
+      ) : (
+      <>
+        <Button 
+          component={Link}
+          to={"/"}
+          color="error"
+          variant='outlined'
+          onClick={handleCloseSearch}
+        >
+          {searchTermStatic} X
+        </Button>
+      </>)}
 
       <hr/>
 

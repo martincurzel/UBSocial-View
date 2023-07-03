@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { callApiRead } from "../helpers/apiCallRead";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
+import { callApiNoRead } from '../helpers/apiCallNoRead';
+import { Button } from '@mui/material';
 
 const ActDetail = () => {
 
@@ -28,6 +30,25 @@ const ActDetail = () => {
     fetchData();
   }, [params.id]);
 
+  const handleJoin = (act) => {
+    const updatedActivity = { ...activity };
+
+    updatedActivity.isJoined = !updatedActivity.isJoined;
+
+    callApiNoRead("POST", "Activity/join/" + act.id, null)
+      .then(response => {
+        console.log(response);
+        setActivity(updatedActivity);
+      })
+      .catch(error => {
+        // Handle any errors from the API
+        console.error('Error:', error);
+        // Revert the button state if the API call fails
+        updatedActivity.isJoined = !updatedActivity.isJoined;
+        setActivity(updatedActivity);
+      });
+  };
+
   return (
     <div className="Act-Detail" style={{ margin: '20px' }}>
       {activity && (
@@ -50,6 +71,23 @@ const ActDetail = () => {
                   <p className="mb-3">Contacto: {activity.contact}</p>
                   <p className="mb-3">Cantidad de miembros: {activity.members}</p>
                   <p className="mb-3">Fecha: {activity.dateFinishActivity}</p>
+                  {activity.isJoined === null ? (
+                  <>
+                  </>
+                  // eslint-disable-next-line
+                  ) : activity.isJoined == false ? (
+                  <>
+                    <Button onClick={() => handleJoin(activity)} size="small" color="primary">
+                      unirme
+                    </Button>
+                  </>
+                  ) : (
+                  <>
+                    <Button onClick={() => handleJoin(activity)} size="small" color="primary">
+                      dejar
+                    </Button>
+                  </>
+                  )}
                 </div>
 
               </Box>
