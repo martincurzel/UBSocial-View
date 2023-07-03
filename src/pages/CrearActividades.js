@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { callApiNoReadFormData } from "../helpers/apiCallNoRead";
-import { useSelector } from "react-redux";
 import { Button } from "@mui/material";
 
 const CrearActividades = () => {
@@ -91,13 +90,7 @@ const CrearActividades = () => {
                 </Button>
                 
                 <button>Crear Actividad</button>
-                <h2>Preview</h2>
-                <p>{Title}</p>
-                <p>{Description}</p>
-                <p>{Contact}</p>
-                <p>{ActivityDateFinished}</p>
-                <p>{File}</p>
-                {preview && <img src={preview} alt="Preview" />}
+                
             </form>
         </div>
     );

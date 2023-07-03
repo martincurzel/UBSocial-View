@@ -9,6 +9,7 @@ const ActDetail = () => {
     let navigate = useNavigate();
     const params = useParams();
     const [activity, setActivity]= useState([])
+    
 
     useEffect(() => {
         
@@ -40,7 +41,9 @@ const ActDetail = () => {
             {activity && (
                 <article>
                     <h2>{activity.title}</h2>
+                    {/* <p>{activity.URLphotos}</p> */}
                     <p>{activity.URLphotos}</p>
+                    {activity.URLphotos && <img src={activity.URLphotos} />}
                     <div>{activity.description}</div>
                     <Button onClick={() => navigate(-1)} variant="outlined" color="secondary">Atrás</Button>  
                 </article>

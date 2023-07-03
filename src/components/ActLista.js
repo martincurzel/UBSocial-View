@@ -17,7 +17,7 @@ const ActLista = (props) => {
                 sx={{ my: 2, color: 'black', display: 'block' }}
               >
                <h2>{act.title}</h2>
-               <p>Creado por: {act.author}</p>
+               <p>Fecha de finalizacion: {act.ActivityDateFinished}</p>
 
               
             </Button>
