@@ -7,6 +7,7 @@ import ContentLista from "../components/ContentLista";
 import Modal from '@mui/material/Modal';
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 const ContenidoPage = () => {
   const [download, setDownload] = useState(null)
@@ -50,14 +51,13 @@ const ContenidoPage = () => {
 
         <div className="text-center mt-5">
           <div className='row'>
-            <div className='col-md-10'>
-              <h1 className='mb-5'>Contenido Descargable</h1>
+            <div className='col-md-10 mt-3'>
+              <Typography variant="h4" >Contenido Descargable</Typography>
             </div>
             <div className='col-md-2 mt-3'>
               {isLoggedIn ? (
                 <Button
                   component={Link}
-                  //onClick={() => handleUploadContent()}
                   to={"/subir_c/" + id}
                   key={"Subir Contenido"}
                   variant="outlined"
@@ -68,16 +68,16 @@ const ContenidoPage = () => {
               ) : (
                 <Button onClick={() => handleLoginModal(true)} variant="outlined" color="secondary">Subir</Button>
               )}
-              
+
             </div>
-            
+
           </div>
         </div>
       ) : (
         <>
           <div className='row'>
             <div className='col-md-10'>
-              <h1 className='mb-5'>Contenido Descargable</h1>
+            <Typography className="mb-5" variant="h4" >Contenido Descargable</Typography>
             </div>
             <div className='col-md-2 mt-3'>
               {isLoggedIn ? (

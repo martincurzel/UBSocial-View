@@ -60,7 +60,6 @@ const ActividadesPage = () => {
   return (
     <div>
 
-
       <div className='row mt-5'>
         <div className='col-md-10'>
           <Typography variant="h4">Actividades de los alumnos</Typography>
@@ -96,6 +95,8 @@ const ActividadesPage = () => {
 
 
       <ActLista acts={activity} title="Todas las Actividades" />
+
+      
 
     </div>
   );

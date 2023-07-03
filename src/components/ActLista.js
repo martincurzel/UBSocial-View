@@ -14,10 +14,11 @@ const ActLista = (props) => {
   return (
     <section className="row">
       {
+         props.acts ? (
         props.acts.map((act) => (
 
-          <div className="col-md-3 mt-5">
-            <Card className="" key={act.id} sx={{ maxWidth: 345 }}>
+          <div key={act.id} className="col-md-3 mt-5">
+            <Card className=""  sx={{ maxWidth: 345 }}>
               <CardActionArea component={Link} to={"/actividades/" + act.id}>
                 <CardMedia
                   component="img"
@@ -42,8 +43,10 @@ const ActLista = (props) => {
             </Card>
           </div>
 
-        ))
-      }
+        ))) : (
+            <h4 className="text-center mt-5">No hay actividades por el momento Xd</h4>
+        )}
+      
 
     </section>
 
