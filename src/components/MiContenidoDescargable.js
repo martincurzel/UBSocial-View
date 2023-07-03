@@ -6,7 +6,7 @@ const MiContenidoDescargable = () => {
   const loginToken = localStorage.getItem('jwtToken');
   const [download, setDownload] = useState([]);
 
-  useEffect(() => {
+  const fetchContent = () => {
     // Fetch profile data from the API
     callApiNoRead("GET", "downloadableContent/current", null)
       .then(response => {
@@ -17,12 +17,16 @@ const MiContenidoDescargable = () => {
         // Handle any errors from the API
         console.error('Error:',error);
       });
+  }
+
+  useEffect(() => {
+    fetchContent();
   }, [loginToken]);
 
   return (
     <div style={{ width: 'auto', margin: 'auto' }}>
       {download.length > 0 ? (
-        <ContentLista sub={download} deleteFlag={true}  title="Todas las Actividades" />
+        <ContentLista sub={download} deleteFlag={true} fetchContent={fetchContent} title="Todas las Actividades" />
       ) : (
         <p>No hay contenido descagable subido por vos</p>
       )}

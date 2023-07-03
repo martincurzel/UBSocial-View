@@ -11,7 +11,7 @@ const MisActividades = () => {
   const [activities, setActivities]= useState([]);
   const loginToken = localStorage.getItem('jwtToken');
 
-  useEffect(() => {
+  const fetchActivities = () => {
     // Fetch profile data from the API
     callApiNoRead("GET", "activity/current", null)
       .then(response => {
@@ -22,6 +22,10 @@ const MisActividades = () => {
         // Handle any errors from the API
         console.error('Error:',error);
       });
+  }
+
+  useEffect(() => {
+    fetchActivities();
   }, [loginToken]);
 
   const deleteActivity = (id) => {
@@ -35,10 +39,7 @@ const MisActividades = () => {
           showConfirmButton: false,
           timer: 1000
       })
-    
-      setTimeout(function () {
-          window.location.reload();
-      }, 1150);
+      fetchActivities();
       })
       .catch(error => {
         // Handle any errors from the API

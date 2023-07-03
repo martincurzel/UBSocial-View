@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { callApiNoRead } from "../helpers/apiCallNoRead";
 
-const ContentLista = ({ sub, deleteFlag }) => {
+const ContentLista = ({ sub, deleteFlag, fetchContent }) => {
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -48,10 +48,7 @@ const ContentLista = ({ sub, deleteFlag }) => {
           showConfirmButton: false,
           timer: 1000
       })
-    
-      setTimeout(function () {
-          window.location.reload();
-      }, 1150);
+      fetchContent();
       })
       .catch(error => {
         // Handle any errors from the API

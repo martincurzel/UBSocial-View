@@ -11,17 +11,21 @@ const MisPropuestas = () => {
   const [proposals, setProposals]= useState([]);
   const loginToken = localStorage.getItem('jwtToken');
 
-  useEffect(() => {
+  const fetchProposal = () => {
     // Fetch profile data from the API
     callApiNoRead("GET", "proposal/current", null)
       .then(response => {
         console.log('Response:',response);
-        setProposals(response.data)
+        setProposals(response.data);
       })
       .catch(error => {
         // Handle any errors from the API
         console.error('Error:',error);
       });
+  }
+
+  useEffect(() => {
+    fetchProposal();
   }, [loginToken]);
 
   const deleteProposal = (id) => {
@@ -35,10 +39,7 @@ const MisPropuestas = () => {
           showConfirmButton: false,
           timer: 1000
       })
-    
-      setTimeout(function () {
-          window.location.reload();
-      }, 1150);
+      fetchProposal();
       })
       .catch(error => {
         // Handle any errors from the API
