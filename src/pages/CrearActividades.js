@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { callApiNoReadFormData } from "../helpers/apiCallNoRead";
-import { Button, Box } from "@mui/material";
+import { Button, Box, Typography } from "@mui/material";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
@@ -57,54 +57,62 @@ const CrearActividades = () => {
 
     return (
         <div className="Crear">
-            <h1 className="mt-3">Crear Actividad</h1>
-            <Box className="container mt-5 pb-3 px-4"
-                sx={{
-                    width: '100%',
-                    border: '1.5px solid rgba(108,26,123,255)',
-                    borderRadius: 3
-                }}
-            >
-                <form className="mt-3" onSubmit={handlesubmit}>
-                    <label >Titulo de la actividad</label>
-                    <input
-                        type="text"
-                        required
-                        value={Title}
-                        onChange={(e) => setTitulo(e.target.value)}
-                    />
-                    <label className="mt-2" >Descripcion:</label>
-                    <textarea
-                        required
-                        value={Description}
-                        onChange={(e) => setDesc(e.target.value)}
-                    />
-                    <label className="mt-2">Contacto:</label>
-                    <input
-                        type="text"
-                        required
-                        value={Contact}
-                        onChange={(e) => setContancto(e.target.value)}
-                    />
-                    <label className="mt-3">Fecha de Finalizacion:</label>
-                    <input
-                        type="date"
-                        required
-                        value={ActivityDateFinished}
-                        onChange={(e) => setFecha(e.target.value)}
-                    />
+            {localStorage.getItem("jwtToken") === null ? (
+            <>
+                <Typography className="mb-4" variant="p">Porfavor accede a tu cuenta para acceder a esta página.</Typography>
+            </>
+            ) : (
+            <>
+                <h1 className="mt-3">Crear Actividad</h1>
+                <Box className="container mt-5 pb-3 px-4"
+                    sx={{
+                        width: '100%',
+                        border: '1.5px solid rgba(108,26,123,255)',
+                        borderRadius: 3
+                    }}
+                >
+                    <form className="mt-3" onSubmit={handlesubmit}>
+                        <label >Titulo de la actividad</label>
+                        <input
+                            type="text"
+                            required
+                            value={Title}
+                            onChange={(e) => setTitulo(e.target.value)}
+                        />
+                        <label className="mt-2" >Descripcion:</label>
+                        <textarea
+                            required
+                            value={Description}
+                            onChange={(e) => setDesc(e.target.value)}
+                        />
+                        <label className="mt-2">Contacto:</label>
+                        <input
+                            type="text"
+                            required
+                            value={Contact}
+                            onChange={(e) => setContancto(e.target.value)}
+                        />
+                        <label className="mt-3">Fecha de Finalizacion:</label>
+                        <input
+                            type="date"
+                            required
+                            value={ActivityDateFinished}
+                            onChange={(e) => setFecha(e.target.value)}
+                        />
 
-                    <label className="mt-4">Foto de la Actividad:</label>
-                    <input type="file" className="form-control" required accept="image/*" onChange={handleImageUpload} />
+                        <label className="mt-4">Foto de la Actividad:</label>
+                        <input type="file" className="form-control" required accept="image/*" onChange={handleImageUpload} />
 
-                    <hr className="mt-4" />
+                        <hr className="mt-4" />
 
-                    <Button className="mt-1" type="submit" variant="outlined" color="secondary">Crear Actividad</Button>
+                        <Button className="mt-1" type="submit" variant="outlined" color="secondary">Crear Actividad</Button>
 
 
 
-                </form>
-            </Box>
+                    </form>
+                </Box>
+            </>
+            )}
         </div>
     );
 

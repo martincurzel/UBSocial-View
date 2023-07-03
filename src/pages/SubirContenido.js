@@ -3,7 +3,7 @@ import { useState } from "react";
 import { callApiNoReadFormData } from "../helpers/apiCallNoRead";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 
 const SubirContenido = () => {
@@ -54,26 +54,34 @@ const SubirContenido = () => {
 
     return(
         <div className="Crear mt-5">
-            <hr/>
-            <h1>Subir Contenido</h1>
-            <form className="mt-5" onSubmit={handlesubmit}>
-                <label>Titulo del contenido</label>
-                <input 
-                type="text"
-                required 
-                value={Title}
-                onChange={(e) => setTitulo(e.target.value)}
-                />
-               
-                <label className="mt-3">Subir Archivo</label>
+            {localStorage.getItem("jwtToken") === null ? (
+            <>
+                <Typography className="mb-4" variant="p">Porfavor accede a tu cuenta para acceder a esta página.</Typography>
+            </>
+            ) : (
+            <>
+                <hr/>
+                <h1>Subir Contenido</h1>
+                <form className="mt-5" onSubmit={handlesubmit}>
+                    <label>Titulo del contenido</label>
+                    <input 
+                    type="text"
+                    required 
+                    value={Title}
+                    onChange={(e) => setTitulo(e.target.value)}
+                    />
                 
+                    <label className="mt-3">Subir Archivo</label>
+                    
 
-                <input type="file" accept="*" onChange={handleImageUpload} />
+                    <input type="file" accept="*" onChange={handleImageUpload} />
 
 
-                <Button className="mt-5" type="submit" variant="outlined" color="secondary">Enviar</Button>
-            </form>
-            <hr/>
+                    <Button className="mt-5" type="submit" variant="outlined" color="secondary">Enviar</Button>
+                </form>
+                <hr/>
+            </>
+            )}
         </div>
     );
     

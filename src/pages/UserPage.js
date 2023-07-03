@@ -51,35 +51,45 @@ export default function UserPage() {
   };
 
   return (
-    <Box 
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '100%' }}
-    >
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        textColor="secondary"
-        indicatorColor="secondary"
-        sx={{ borderRight: 1, borderColor: 'divider', height: '100vh'}}
+    <div className="Crear mt-5">
+    {localStorage.getItem("jwtToken") === null ? (
+      <>
+          <Typography className="mb-4" variant="p">Porfavor accede a tu cuenta para acceder a esta página.</Typography>
+      </>
+      ) : (
+      <>
+      <Box 
+        sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: '100%' }}
       >
-        <Tab label="Mi Perfil" {...a11yProps(0)} />
-        <Tab label="Mis Actividades" {...a11yProps(1)} />
-        <Tab label="Mis Propuestas" {...a11yProps(2)} />
-        <Tab label="Mi Contenido Descargable" {...a11yProps(3)} />
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        <MiPefil/>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <MisActividades/>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <MisPropuestas/>
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <MiContenidoDescargable/>
-      </TabPanel>
-    </Box>
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          textColor="secondary"
+          indicatorColor="secondary"
+          sx={{ borderRight: 1, borderColor: 'divider', height: '100vh'}}
+        >
+          <Tab label="Mi Perfil" {...a11yProps(0)} />
+          <Tab label="Mis Actividades" {...a11yProps(1)} />
+          <Tab label="Mis Propuestas" {...a11yProps(2)} />
+          <Tab label="Mi Contenido Descargable" {...a11yProps(3)} />
+        </Tabs>
+        <TabPanel value={value} index={0}>
+          <MiPefil/>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <MisActividades/>
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <MisPropuestas/>
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <MiContenidoDescargable/>
+        </TabPanel>
+      </Box>
+      </>
+      )}
+    </div>
   );
 }
