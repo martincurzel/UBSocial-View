@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react';
-import {useState} from 'react';
+import { useState } from 'react';
 import ActLista from '../components/ActLista';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { callApiRead } from '../helpers/apiCallRead';
-// import BarraBusqueda from '../components/BarraBusqueda';
+import { useSelector } from "react-redux";
+import { Typography  } from '@mui/material';
 
 
 
- 
 const ActividadesPage = () => {
-  const [activity, setActivity]= useState([]);
+  const [activity, setActivity] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,65 +35,67 @@ const ActividadesPage = () => {
   }, []);
 
   const handleChange = (e) => {
-      setSearchTerm(e.target.value);
-    };
+    setSearchTerm(e.target.value);
+  };
+
+  const handleLoginModal = (bool) => {
+    setIsLoginModalOpen(bool);
+  };
+
 
   const handleClickSearch = async (e) => {
     await callApiRead("Activity/currentTitle/" + searchTerm)
-    .then(response => {
-      setActivity(response.data)
-      console.log(response)
-    })
-    .catch(error => {
-      // Handle any errors from the API
-      console.error('Error:', error);
-    });
+      .then(response => {
+        setActivity(response.data)
+        console.log(response)
+      })
+      .catch(error => {
+        // Handle any errors from the API
+        console.error('Error:', error);
+      });
 
-    };
-    
+  };
 
-  
+
   return (
     <div>
-      <h1>Actividades</h1>
 
-  
-        <Button
-                component={Link}
-                to={"/crear_a"}
-                key={"Crear Actividad"}
-                sx={{ my: 2, color: 'black', display: 'block' }}
-              >
-                {"Crear Actividad"}
-              </Button>
-        
 
-        {/* boton de crear actividades */}
+      <div className='row mt-5'>
+        <div className='col-md-10'>
+          <Typography variant="h4">Actividades de los alumnos</Typography>
+        </div>
+        <div className='col-md-2 mt-3'>
+          {isLoggedIn ? (
+            <Button component={Link} to={"/crear_a"} variant="outlined" color="secondary">Crear Actividad</Button>
+          ) : (
+            <Button onClick={() => handleLoginModal(true)} variant="outlined" color="secondary">Crear Actividad</Button>
+          )}
+        </div>
+      </div>
 
-        {/* <input type='text' placeholder='Buscar Actividad' className='form-control' /> */}
-          
-        <input
-        type="text"
-        value={searchTerm}
-        onChange={handleChange}
-        placeholder="Buscar..."
-      />  
-        
-        {/* <input
-        type="text"
-        value={searchTerm}
-        onChange={handleChange}
-        placeholder="Buscar..."
-      /> */}
-        {/* barra de busqueda de actividades */}
+      <div className='row justify-content-center mt-5 mb-5'>
 
-        <button className='btn btn-primary' onClick={handleClickSearch} >Buscar Actividad</button>
-        {/* Boton de busca actividaes */}
-        
-       <ActLista acts={activity} title="Todas las Actividades" /> 
-       {/* <ActLista acts={act.filter((ACT)=> ACT.author === `Martincito`)} title="Actividades de Martincito"/> Codigo de la lista que filtra por el titulo */}
-       
-        {/* Mostrar toda la lista de actividades */}
+        <div className='col-md-4'>
+          <input
+            type="text"
+            className='form-control col-md-4'
+            value={searchTerm}
+            onChange={handleChange}
+            placeholder="Buscar..."
+          />
+        </div>
+
+        <div className='col-md-2'>
+          <Button onClick={handleClickSearch} variant="outlined" color="secondary">Buscar Actividad</Button>
+        </div>
+
+      </div>
+
+      <hr/>
+
+
+      <ActLista acts={activity} title="Todas las Actividades" />
 
     </div>
   );
