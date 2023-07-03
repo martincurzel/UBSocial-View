@@ -33,7 +33,7 @@ const MisPropuestas = () => {
       .then(response => {
         console.log('Response:',response);
         Swal.fire({
-          position: 'top-end',
+          position: 'center',
           icon: 'success',
           title: 'Operacion realizada con exito!',
           showConfirmButton: false,

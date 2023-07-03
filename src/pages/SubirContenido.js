@@ -3,7 +3,7 @@ import { useState } from "react";
 import { callApiNoReadFormData } from "../helpers/apiCallNoRead";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Button, Typography } from "@mui/material";
+import { Button,Box, Typography } from "@mui/material";
 
 
 const SubirContenido = () => {
@@ -26,13 +26,10 @@ const SubirContenido = () => {
         formData.append('File', file)
         formData.append('idSubject', idSubject)
         
-        for (let pair of formData.entries()) {
-            console.log(pair[0]+ ', '+ pair[1]); 
-        }
         await callApiNoReadFormData("POST","downloadableContent", formData)
         .then(response => {
             Swal.fire({
-                position: 'top-end',
+                position: 'center',
                 icon: 'success',
                 title: 'Operacion realizada con exito!',
                 showConfirmButton: false,
@@ -45,7 +42,6 @@ const SubirContenido = () => {
           })
           .catch(error => {
             // Handle any errors from the API
-            console.error('Error:', error);
           });
         
       }
@@ -57,12 +53,18 @@ const SubirContenido = () => {
             {localStorage.getItem("jwtToken") === null ? (
             <>
                 <Typography className="mb-4" variant="p">Porfavor accede a tu cuenta para acceder a esta página.</Typography>
-            </>
+                </>
             ) : (
             <>
-                <hr/>
-                <h1>Subir Contenido</h1>
-                <form className="mt-5" onSubmit={handlesubmit}>
+                    <h1>Subir Contenido</h1>
+                <Box className="container mt-5 pb-3 px-4"
+                sx={{
+                    width: '100%',
+                    border: '1.5px solid rgba(108,26,123,255)',
+                    borderRadius: 3
+                }}
+            >
+<form className="mt-5" onSubmit={handlesubmit}>
                     <label>Titulo del contenido</label>
                     <input 
                     type="text"
@@ -74,12 +76,15 @@ const SubirContenido = () => {
                     <label className="mt-3">Subir Archivo</label>
                     
 
-                    <input type="file" accept="*" onChange={handleImageUpload} />
+                <input className="form-control" type="file" accept="*" onChange={handleImageUpload} />
+                <hr className="mt-4"/>
 
 
-                    <Button className="mt-5" type="submit" variant="outlined" color="secondary">Enviar</Button>
+                    <Button className="mt-3" type="submit" variant="outlined" color="secondary">Enviar</Button>
                 </form>
-                <hr/>
+    
+            </Box>
+            
             </>
             )}
         </div>

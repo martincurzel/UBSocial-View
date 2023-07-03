@@ -17,11 +17,9 @@ const MateriasPage = () => {
         .then(response => {
           setMaterias(response.data)
           setFiltredData(response.data)
-          console.log(response)
         })
         .catch(error => {
           // Handle any errors from the API
-          console.error('Error:', error);
         });
     }
 
