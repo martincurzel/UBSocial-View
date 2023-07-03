@@ -43,7 +43,7 @@ const ActividadesPage = () => {
   // console.log('Datos de tabla', titulo);
 
   return (
-    <div style={{ margin: '20px' }}>
+    <div>
       <h1>Actividades</h1>
 
      

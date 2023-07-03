@@ -41,7 +41,7 @@ const ContenidoPage = () => {
 
   return (
 
-    <div style={{ margin: '20px' }}>
+    <div>
       {download == null ? (<>
 
         <span>cargando...</span>

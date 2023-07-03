@@ -8,13 +8,13 @@ import ActividadesPage from './pages/ActividadesPage.js';
 import PropuestasPage from './pages/PropuestasPage';
 import ContenidoPage from './pages/ContenidoPage.js';
 import UserPage from './pages/UserPage.js';
-import PerfilPage from './pages/PerfilPage.js';
 import CrearActividades from './pages/CrearActividades.js';
 import ActDetail from './pages/ActDetail.js';
 import { Provider } from "react-redux";
 import store from "./store";
 import SubirContenido from './pages/SubirContenido.js';
 import MateriasPage from './pages/MateriasPage';
+import NoPage from './pages/NoPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,15 +22,17 @@ root.render(
       <Provider store={store}>
         <Routes>
           <Route path='/' element={<App/>}>
+            <Route index element={<ActividadesPage />} />
             <Route path='actividades/:id' element={<ActDetail/>}/>
             <Route path='actividades' element={<ActividadesPage/>} />
             <Route path='propuestas' element={<PropuestasPage/>} />
             <Route path='materias' element={<MateriasPage/>} />
             <Route path='contenidos/:id' element={<ContenidoPage/>} />
             <Route path='perfil' element={<UserPage/>} />
-            <Route path='perfil' element={<PerfilPage/>} />
             <Route path='crear_a' element={<CrearActividades/>}/>
             <Route path='subir_c/:idSubject' element={<SubirContenido />}/>
+            <Route path="*" element={<NoPage />} />
+
             
           </Route>
         </Routes>
