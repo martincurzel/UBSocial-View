@@ -43,61 +43,48 @@ const ContenidoPage = () => {
   return (
 
     <div>
+
+      <div className="mt-5 mb-5">
+        <div className='row'>
+          <div className='col-md-10 mt-3'>
+            <Typography variant="h4" >Contenido Descargable</Typography>
+          </div>
+          <div className='col-md-2 mt-3'>
+            {isLoggedIn ? (
+              <Button
+                component={Link}
+                to={"/subir_c/" + id}
+                key={"Subir Contenido"}
+                variant="outlined"
+                color="secondary"
+              >
+                Subir
+              </Button>
+            ) : (
+              <Button onClick={() => handleLoginModal(true)} variant="outlined" color="secondary">Subir</Button>
+            )}
+
+          </div>
+
+        </div>
+      </div>
+
       {download == null ? (<>
 
         <span>cargando...</span>
       </>
       ) : download === "" ? (
-
-        <div className="text-center mt-5">
-          <div className='row'>
-            <div className='col-md-10 mt-3'>
-              <Typography variant="h4" >Contenido Descargable</Typography>
-            </div>
-            <div className='col-md-2 mt-3'>
-              {isLoggedIn ? (
-                <Button
-                  component={Link}
-                  to={"/subir_c/" + id}
-                  key={"Subir Contenido"}
-                  variant="outlined"
-                  color="secondary"
-                >
-                  Subir
-                </Button>
-              ) : (
-                <Button onClick={() => handleLoginModal(true)} variant="outlined" color="secondary">Subir</Button>
-              )}
-
-            </div>
-
-          </div>
+        <div className="container text-center">
+          <hr className="mt-5"/>
+          <Typography className="mt-5" variant="h6" >No hay archivos para esta materia :(</Typography>
         </div>
+
       ) : (
-        <>
-          <div className='row'>
-            <div className='col-md-10'>
-            <Typography className="mb-5" variant="h4" >Contenido Descargable</Typography>
-            </div>
-            <div className='col-md-2 mt-3'>
-              {isLoggedIn ? (
-                <Button
-                  component={Link}
-                  //onClick={() => handleUploadContent()}
-                  to={"/subir_c/" + id}
-                  key={"Subir Contenido"}
-                  variant="outlined"
-                  color="secondary"
-                >
-                  Subir
-                </Button>
-              ) : (
-                <Button onClick={() => handleLoginModal(true)} variant="outlined" color="secondary">Subir</Button>
-              )}
-            </div>
-          </div>
-          <ContentLista sub={download} deleteFlag={false} title="Todas las Actividades" />
-          <Modal open={isLoginModalOpen} onClose={() => handleLoginModal(false)}>
+        <>         
+          <ContentLista sub={download} deleteFlag={false} title="Todas las Actividades" />          
+        </>
+      )}
+      <Modal open={isLoginModalOpen} onClose={() => handleLoginModal(false)}>
             <div className='text-center' style={{ backgroundColor: '#f0f0f0', width: 300, height: 280, margin: 'auto', marginTop: 100, padding: 20 }}>
               <h4>Iniciar sesion </h4>
               <hr />
@@ -105,9 +92,7 @@ const ContenidoPage = () => {
               <Button className='mt-5' variant="outlined" onClick={() => handleLoginModal(false)} color="secondary">Aceptar</Button>
             </div>
           </Modal>
-        </>
-      )}
-    </div>
+    </div >
 
   );
 };

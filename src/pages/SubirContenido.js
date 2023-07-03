@@ -3,7 +3,7 @@ import { useState } from "react";
 import { callApiNoReadFormData } from "../helpers/apiCallNoRead";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Button } from "@mui/material";
+import { Button, Box } from "@mui/material";
 
 
 const SubirContenido = () => {
@@ -32,7 +32,7 @@ const SubirContenido = () => {
         await callApiNoReadFormData("POST","downloadableContent", formData)
         .then(response => {
             Swal.fire({
-                position: 'top-end',
+                position: 'center',
                 icon: 'success',
                 title: 'Operacion realizada con exito!',
                 showConfirmButton: false,
@@ -54,9 +54,15 @@ const SubirContenido = () => {
 
     return(
         <div className="Crear mt-5">
-            <hr/>
             <h1>Subir Contenido</h1>
-            <form className="mt-5" onSubmit={handlesubmit}>
+            <Box className="container mt-5 pb-3 px-4"
+                sx={{
+                    width: '100%',
+                    border: '1.5px solid rgba(108,26,123,255)',
+                    borderRadius: 3
+                }}
+            >
+<form className="mt-5" onSubmit={handlesubmit}>
                 <label>Titulo del contenido</label>
                 <input 
                 type="text"
@@ -68,12 +74,15 @@ const SubirContenido = () => {
                 <label className="mt-3">Subir Archivo</label>
                 
 
-                <input type="file" accept="*" onChange={handleImageUpload} />
+                <input className="form-control" type="file" accept="*" onChange={handleImageUpload} />
+                <hr className="mt-4"/>
 
 
-                <Button className="mt-5" type="submit" variant="outlined" color="secondary">Enviar</Button>
+                <Button className="mt-3" type="submit" variant="outlined" color="secondary">Enviar</Button>
             </form>
-            <hr/>
+
+            </Box>
+            
         </div>
     );
     
