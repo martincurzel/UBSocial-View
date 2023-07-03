@@ -15,6 +15,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import SubirContenido from './pages/SubirContenido.js';
 import MateriasPage from './pages/MateriasPage';
+import NoPage from './pages/NoPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,6 +23,7 @@ root.render(
       <Provider store={store}>
         <Routes>
           <Route path='/' element={<App/>}>
+            <Route index element={<ActividadesPage />} />
             <Route path='actividades/:id' element={<ActDetail/>}/>
             <Route path='actividades' element={<ActividadesPage/>} />
             <Route path='propuestas' element={<PropuestasPage/>} />
@@ -31,6 +33,8 @@ root.render(
             <Route path='perfil' element={<PerfilPage/>} />
             <Route path='crear_a' element={<CrearActividades/>}/>
             <Route path='subir_c/:idSubject' element={<SubirContenido />}/>
+            <Route path="*" element={<NoPage />} />
+
             
           </Route>
         </Routes>
