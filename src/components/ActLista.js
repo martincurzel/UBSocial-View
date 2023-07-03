@@ -53,10 +53,10 @@ const ActLista = (props) => {
                 <Button component={Link} to={"/actividades/" + act.id} size="small" color="primary">
                   ver
                 </Button>
-                {act.isJoined == null ? (
+                {act.isJoined === null ? (
                 <>
                 </>
-                ) : act.isJoined == false ? (
+                ) : act.isJoined === false ? (
                 <>
                   <Button onClick={() => handleJoin(act)} size="small" color="primary">
                     unirme
