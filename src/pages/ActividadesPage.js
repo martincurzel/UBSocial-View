@@ -34,6 +34,20 @@ const ActividadesPage = () => {
 
   }, []);
 
+  const handleJoin = (activityId, areuJoined) => {
+    // Make API call to update the AreuJoined property of the activity
+    // ...
+  
+    // Update the activity list in the state
+    const updatedActivity = activity.map((item) => {
+      if (item.id === activityId) {
+        return { ...item, AreuJoined: areuJoined };
+      }
+      return item;
+    });
+    setActivity(updatedActivity);
+  };
+
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -95,7 +109,7 @@ const ActividadesPage = () => {
       <hr/>
 
 
-      <ActLista acts={activity} title="Todas las Actividades" />
+      <ActLista acts={activity} title="Todas las Actividades" handleJoin={handleJoin} />
 
     </div>
   );
