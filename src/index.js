@@ -8,7 +8,6 @@ import ActividadesPage from './pages/ActividadesPage.js';
 import PropuestasPage from './pages/PropuestasPage';
 import ContenidoPage from './pages/ContenidoPage.js';
 import UserPage from './pages/UserPage.js';
-import PerfilPage from './pages/PerfilPage.js';
 import CrearActividades from './pages/CrearActividades.js';
 import ActDetail from './pages/ActDetail.js';
 import { Provider } from "react-redux";
@@ -30,7 +29,6 @@ root.render(
             <Route path='materias' element={<MateriasPage/>} />
             <Route path='contenidos/:id' element={<ContenidoPage/>} />
             <Route path='perfil' element={<UserPage/>} />
-            <Route path='perfil' element={<PerfilPage/>} />
             <Route path='crear_a' element={<CrearActividades/>}/>
             <Route path='subir_c/:idSubject' element={<SubirContenido />}/>
             <Route path="*" element={<NoPage />} />
