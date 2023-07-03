@@ -56,7 +56,7 @@ const MiPerfil = () => {
 
   return (
     <div style={{width: 'auto', margin: 'auto'}}>
-      {name == null ? (
+      {name === null ? (
       <>
         <span>cargando...</span>
       </>

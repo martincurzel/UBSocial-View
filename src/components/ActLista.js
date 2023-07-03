@@ -14,8 +14,8 @@ const ActLista = (props) => {
   const handleJoin = (act) => {
     callApiNoRead("POST", "Activity/join/" + act.id, null)
       .then(response => {
-        const updatedAreuJoined = act.AreuJoined === null ? true : !act.AreuJoined;
-        props.handleJoin(act.id, updatedAreuJoined);
+        const updatedisJoined = act.isJoined === null ? true : !act.isJoined;
+        props.handleJoin(act.id, updatedisJoined);
       })
       .catch(error => {
         // Handle any errors from the API
@@ -52,10 +52,10 @@ const ActLista = (props) => {
                 <Button component={Link} to={"/actividades/" + act.id} size="small" color="primary">
                   ver
                 </Button>
-                {act.AreuJoined == null ? (
+                {act.isJoined == null ? (
                 <>
                 </>
-                ) : act.AreuJoined == false ? (
+                ) : act.isJoined == false ? (
                 <>
                   <Button onClick={() => handleJoin(act)} size="small" color="primary">
                     unirme

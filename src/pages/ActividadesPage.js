@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { callApiRead } from '../helpers/apiCallRead';
 import { useSelector } from "react-redux";
-import { Typography  } from '@mui/material';
+import { Typography, Modal } from '@mui/material';
 
 
 
@@ -110,7 +110,14 @@ const ActividadesPage = () => {
 
 
       <ActLista acts={activity} title="Todas las Actividades" handleJoin={handleJoin} />
-
+      <Modal open={isLoginModalOpen} onClose={() => handleLoginModal(false)}>
+        <div className='text-center' style={{ backgroundColor: '#f0f0f0', width: 300, height: 280, margin: 'auto', marginTop: 100, padding: 20 }}>
+          <h4>Iniciar sesion </h4>
+          <hr />
+          <p>Debes iniciar sesion antes de crear una actividad</p>
+          <Button className='mt-5' variant="outlined" onClick={() => handleLoginModal(false)} color="secondary">Aceptar</Button>
+        </div>
+      </Modal>
     </div>
   );
 };
