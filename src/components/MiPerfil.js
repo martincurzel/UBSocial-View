@@ -56,6 +56,12 @@ const MiPerfil = () => {
 
   return (
     <div style={{width: 'auto', margin: 'auto'}}>
+      {name == '' ? (
+      <>
+        <span>cargando...</span>
+      </>
+      ) : (
+      <>
       <div style={{display: 'flex', alignItems: 'center'}}>
         <Typography variant="h2">Hola {name}</Typography>
         {isEditing ? (
@@ -142,6 +148,8 @@ const MiPerfil = () => {
           <></>
         )}
       </div>
+      </>
+      )}
     </div>
   );
 };
