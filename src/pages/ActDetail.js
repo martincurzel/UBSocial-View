@@ -34,6 +34,12 @@ const ActDetail = () => {
     const updatedActivity = { ...activity };
 
     updatedActivity.isJoined = !updatedActivity.isJoined;
+    if(updatedActivity.isJoined === true){
+      updatedActivity.members = updatedActivity.members + 1;
+    }
+    else{
+      updatedActivity.members = updatedActivity.members - 1;
+    }
 
     callApiNoRead("POST", "Activity/join/" + act.id, null)
       .then(response => {
@@ -50,7 +56,7 @@ const ActDetail = () => {
   };
 
   return (
-    <div className="Act-Detail" style={{ margin: '20px' }}>
+    <div style={{ margin: '20px' }}>
       {activity && (
         <div>
           <div className="row justify-content-around">
@@ -61,32 +67,31 @@ const ActDetail = () => {
               <Box
                 sx={{
                   width: '100%',
-                  height: 300,
                   border: '1.5px solid rgba(108,26,123,255)',
                   borderRadius: 3
                 }}
               >
                 <div className="container">
-                  <Typography className="mb-4" variant="h3">{activity.title}</Typography>
-                  <p className="mb-3">Contacto: {activity.contact}</p>
-                  <p className="mb-3">Cantidad de miembros: {activity.members}</p>
-                  <p className="mb-3">Fecha: {activity.dateFinishActivity}</p>
+                  <Typography className="mb-4" variant="h3" style={{ wordWrap: 'break-word' }}>{activity.title}</Typography>
+                  <p className="mb-3" style={{ wordWrap: 'break-word' }}>Contacto: {activity.contact}</p>
+                  <p className="mb-3" style={{ wordWrap: 'break-word' }}>Cantidad de miembros: {activity.members}</p>
+                  <p className="mb-3" style={{ wordWrap: 'break-word' }}>Fecha: {activity.dateFinishActivity}</p>
                   {activity.isJoined === null ? (
                   <>
                   </>
                   // eslint-disable-next-line
                   ) : activity.isJoined == false ? (
-                  <>
-                    <Button onClick={() => handleJoin(activity)} size="small" color="primary">
+                  <div className="mb-4">
+                    <Button onClick={() => handleJoin(activity)} variant="outlined" color="secondary">
                       unirme
                     </Button>
-                  </>
+                  </div>
                   ) : (
-                  <>
-                    <Button onClick={() => handleJoin(activity)} size="small" color="primary">
+                  <div className="mb-4">
+                    <Button onClick={() => handleJoin(activity)} variant="outlined" color="secondary">
                       dejar
                     </Button>
-                  </>
+                  </div>
                   )}
                 </div>
 
@@ -100,13 +105,12 @@ const ActDetail = () => {
           <Box
             sx={{
               width: '100%',
-              height: 300,
               border: '1.5px solid rgba(108,26,123,180)',
               borderRadius: 3,
               marginTop: "3rem !important"
             }}
           >
-            <div className="container">
+            <div className="container" style={{ wordWrap: 'break-word' }}>
               <Typography variant="p">{activity.description}</Typography>
             </div>
 

@@ -274,7 +274,7 @@ function ResponsiveAppBar() {
         </div>
         </Toolbar>
         <Modal open={isLoginModalOpen} onClose={handleCloseLoginModal}>
-        <div style={{ backgroundColor: '#f0f0f0', width: 300, height: 280, margin: 'auto', marginTop: 100, padding: 20 }}>
+        <div style={{ backgroundColor: '#f0f0f0', margin: 'auto', marginTop: '10vh', padding: 20, width: 300 }}>
           <h2>Login</h2>
           <hr/>
           <form className='mt-2' onSubmit={handleLoginFormSubmit} style={{ display: 'grid', gap: '10px' }}>
@@ -298,7 +298,7 @@ function ResponsiveAppBar() {
         </div>
       </Modal>
       <Modal open={isSignupModalOpen} onClose={handleCloseSignupModal}>
-        <div style={{ backgroundColor: '#f0f0f0', width: 300, height: 430, margin: 'auto', marginTop: 100, padding: 20 }}>
+        <div style={{ backgroundColor: '#f0f0f0', margin: 'auto', marginTop: '10vh', padding: 20, width: 300 }}>
           <h2>Signup</h2>
           <form onSubmit={handleSignupFormSubmit} style={{ display: 'grid', gap: '10px' }}>
             <TextField
@@ -330,7 +330,7 @@ function ResponsiveAppBar() {
               required
             />
             <Button type='submit' variant="outlined" color="secondary">Signup</Button>
-            <div style={{"color": "#fc0303"}} >{errorMessage}</div>
+            <div style={{ color: '#fc0303' }}>{errorMessage}</div>
           </form>
         </div>
       </Modal>
