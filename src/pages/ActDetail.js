@@ -67,7 +67,7 @@ const ActDetail = () => {
                 }}
               >
                 <div className="container">
-                  <Typography className="mb-4" variant="h3">{activity.title}</Typography>
+                  <Typography className="mb-4" variant="h5">{activity.title}</Typography>
                   <p className="mb-3">Contacto: {activity.contact}</p>
                   <p className="mb-3">Cantidad de miembros: {activity.members}</p>
                   <p className="mb-3">Fecha: {activity.dateFinishActivity}</p>
