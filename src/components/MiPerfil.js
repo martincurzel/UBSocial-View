@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { callApiNoRead } from "../helpers/apiCallNoRead";
 import { Typography, TextField, Button, Grid } from '@mui/material';
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const MiPerfil = () => {
   const [name, setName] = useState(null);
@@ -33,23 +35,55 @@ const MiPerfil = () => {
     setIsEditing(false);
   };
 
+  function isValidEmail(email) {
+    // You can use a regular expression or any other method to validate the email format
+    // Here's an example using a basic regex pattern
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
   const handleSaveClick = () => {
-    // Perform save operation here, e.g., make an API call to update the profile
-    let user = {
+    console.log(surname);
+    if (!name || !surname || !email || !isValidEmail(email)) {
+      const swalDelete = withReactContent(Swal)
+      swalDelete.fire({
+        icon: 'error',
+        title: "Por favor complete todos los campos correctamente",
+        confirmButtonText: "Aceptar"
+      })
+    }
+    else{
+      // Perform save operation here, e.g., make an API call to update the profile
+      let user = {
         "Email": email,
         "Name": name,
         "Surname": surname,
         "Id": 37
-    }
-    callApiNoRead("PUT", "user", user, loginToken)
+      }
+      callApiNoRead("PUT", "user", user, loginToken)
       .then(response => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Operacion realizada con exito!',
+          showConfirmButton: false,
+          timer: 1000
+      })
         console.log('Response:',response);
       })
       .catch(error => {
         // Handle any errors from the API
+        const swalDelete = withReactContent(Swal)
+        swalDelete.fire({
+          icon: 'error',
+          title: 'Hubo un error en tu pedido!',
+          confirmButtonText: "Aceptar"
+        })
         console.error('Error:',error);
       });
-    setIsEditing(false);
+      setIsEditing(false);
+    }
+    
   };
 
   return (
