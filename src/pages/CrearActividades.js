@@ -81,14 +81,14 @@ const CrearActividades = () => {
                             type="text"
                             required
                             value={Title}
-                            maxlength="20"
+                            maxLength="20"
                             onChange={(e) => setTitulo(e.target.value)}
                         />
                         <label className="mt-2" >Descripcion:</label>
                         <textarea
                             required
                             value={Description}
-                            maxlength="1000"
+                            maxLength="1000"
                             onChange={(e) => setDesc(e.target.value)}
                         />
                         <label className="mt-2">Contacto:</label>
