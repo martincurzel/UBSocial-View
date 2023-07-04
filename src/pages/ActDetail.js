@@ -68,7 +68,8 @@ const ActDetail = () => {
                 sx={{
                   width: '100%',
                   border: '1.5px solid rgba(108,26,123,255)',
-                  borderRadius: 3
+                  borderRadius: 3,
+                  paddingTop: 3,
                 }}
               >
                 <div className="container">
@@ -107,7 +108,9 @@ const ActDetail = () => {
               width: '100%',
               border: '1.5px solid rgba(108,26,123,180)',
               borderRadius: 3,
-              marginTop: "3rem !important"
+              marginTop: "3rem !important",
+              paddingTop: 7,
+              paddingBottom: 7
             }}
           >
             <div className="container" style={{ wordWrap: 'break-word' }}>
