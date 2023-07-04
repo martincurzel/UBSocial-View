@@ -68,7 +68,7 @@ const ActividadesPage = () => {
       setSearchError("Por favor inserte un parametro de busqueda ");
     }else if(searchTerm.length === 1){
       setSearchError("Por favor ingrese más de un caracter ");
-    }else if(/^[a-z0-9 ]+$/i.test(searchTerm) == false){
+    }else if(/^[a-z0-9 ]+$/i.test(searchTerm) === false){
       setSearchError("Por favor ingrese solo caracteres alfanuméricos ");
     }
     else{
