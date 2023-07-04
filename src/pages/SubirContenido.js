@@ -70,6 +70,7 @@ const SubirContenido = () => {
                                 type="text"
                                 required
                                 value={Title}
+                                maxLength="20"
                                 onChange={(e) => setTitulo(e.target.value)}
                             />
 
