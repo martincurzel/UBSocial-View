@@ -72,7 +72,7 @@ const ActDetail = () => {
                 }}
               >
                 <div className="container">
-                  <Typography className="mb-4" variant="h3" style={{ wordWrap: 'break-word' }}>{activity.title}</Typography>
+                  <Typography className="mb-4" variant="h5" style={{ wordWrap: 'break-word' }}>{activity.title}</Typography>
                   <p className="mb-3" style={{ wordWrap: 'break-word' }}>Contacto: {activity.contact}</p>
                   <p className="mb-3" style={{ wordWrap: 'break-word' }}>Cantidad de miembros: {activity.members}</p>
                   <p className="mb-3" style={{ wordWrap: 'break-word' }}>Fecha: {activity.dateFinishActivity}</p>
