@@ -6,7 +6,6 @@ const MiPerfil = () => {
   const [name, setName] = useState(null);
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const loginToken = localStorage.getItem('jwtToken');
 
@@ -37,7 +36,6 @@ const MiPerfil = () => {
   const handleSaveClick = () => {
     // Perform save operation here, e.g., make an API call to update the profile
     let user = {
-        "Password": password,
         "Email": email,
         "Name": name,
         "Surname": surname,
@@ -115,24 +113,7 @@ const MiPerfil = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </Grid>
-        {isEditing && (
-          <>
-            <Grid item xs={12} sm={6}>
-              <Typography variant="subtitle1">Contraseña:</Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                disabled={!isEditing}
-                variant='standard'
-                color= 'secondary'
-                sx={isEditing ? { width: 300 } : { width: 300, border: 'none', margin: 0 }}
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Grid>
-          </>
-        )}
+        
       </Grid>
       <div style={{ textAlign: 'left', marginTop: '30px' }}>
         {isEditing ? (
