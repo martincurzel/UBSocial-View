@@ -109,8 +109,8 @@ const ActDetail = () => {
               border: '1.5px solid rgba(108,26,123,180)',
               borderRadius: 3,
               marginTop: "3rem !important",
-              paddingTop: 7,
-              paddingBottom: 7
+              paddingTop: 2,
+              paddingBottom: 2
             }}
           >
             <div className="container" style={{ wordWrap: 'break-word' }}>

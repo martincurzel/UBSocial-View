@@ -39,7 +39,6 @@ const ActividadesPage = () => {
 
   const handleJoin = (activityId, isJoined) => {
     // Make API call to update the AreuJoined property of the activity
-    // ...
   
     // Update the activity list in the state
     const updatedActivity = activity.map((item) => {
@@ -66,7 +65,11 @@ const ActividadesPage = () => {
   const handleClickSearch = async (e) => {
     setSearchError(null);
     if(searchTerm === ''){
-      setSearchError("Porfavor inserte un parametro de busqueda")
+      setSearchError("Por favor inserte un parametro de busqueda ");
+    }else if(searchTerm.length === 1){
+      setSearchError("Por favor ingrese más de un caracter ");
+    }else if(/^[a-z0-9 ]+$/i.test(searchTerm) == false){
+      setSearchError("Por favor ingrese solo caracteres alfanuméricos ");
     }
     else{
       await callApiRead("Activity/currentTitle/" + searchTerm)
@@ -118,6 +121,25 @@ const ActividadesPage = () => {
         </div>
 
       </div>
+
+      {isSearchActive === true ? (
+      <>
+      <Button 
+          component={Link}
+          to={"/"}
+          color="error"
+          variant='outlined'
+          onClick={handleCloseSearch}
+          className='me-4'
+        >
+          {searchTermStatic} X
+        </Button>
+      </>
+      ) : (
+      <>
+        
+      </>)}
+
       {searchError === null ? (
       <>
       </>
@@ -125,21 +147,7 @@ const ActividadesPage = () => {
       <>
         <Typography variant="p" sx={{ color: '#ff0000' }}>{searchError}</Typography>
       </>)}
-      {isSearchActive === false ? (
-      <>
-      </>
-      ) : (
-      <>
-        <Button 
-          component={Link}
-          to={"/"}
-          color="error"
-          variant='outlined'
-          onClick={handleCloseSearch}
-        >
-          {searchTermStatic} X
-        </Button>
-      </>)}
+      
 
       <hr/>
 
