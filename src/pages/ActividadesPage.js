@@ -65,19 +65,23 @@ const ActividadesPage = () => {
 
   const handleClickSearch = async (e) => {
     setSearchError(null);
-    await callApiRead("Activity/currentTitle/" + searchTerm)
-      .then(response => {
-        setActivity(response.data);
-        setIsSearchActive(true);
-        setSearchTermStatic(searchTerm);
-        console.log(response);
-      })
-      .catch(error => {
-        // Handle any errors from the API
-        setSearchError(error.response.data);
-        console.error('Error:', error);
-      });
-
+    if(searchTerm === ''){
+      setSearchError("Porfavor inserte un parametro de busqueda")
+    }
+    else{
+      await callApiRead("Activity/currentTitle/" + searchTerm)
+        .then(response => {
+          setActivity(response.data);
+          setIsSearchActive(true);
+          setSearchTermStatic(searchTerm);
+          console.log(response);
+        })
+        .catch(error => {
+          // Handle any errors from the API
+          setSearchError(error.response.data);
+          console.error('Error:', error);
+        });
+    }
   };
 
 
