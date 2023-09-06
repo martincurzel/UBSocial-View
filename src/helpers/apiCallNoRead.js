@@ -12,7 +12,6 @@ export const callApiNoRead = (methodParam, url, data) => {
     method: methodParam,
     url: BASE_PATH + url,
     data: data,
-    withCredentials: true,
     headers: {
       'Content-Type': 'application/json',
       'Authorization': "Bearer " + localStorage.getItem('jwtToken')
@@ -30,7 +29,6 @@ export const callApiNoReadFormData = (methodParam, url, data) => {
     method: methodParam,
     url: BASE_PATH + url,
     data: data,
-    withCredentials: true,
     headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': "Bearer " + localStorage.getItem('jwtToken')
